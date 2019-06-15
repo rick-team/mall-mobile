@@ -41,6 +41,29 @@
     background: #FFF;
     padding: .3rem;
     margin-bottom: .2rem;
+    position: relative;
+
+    .detail-open-button{
+      div{
+        width: .75rem;
+        height: .75rem;
+        background:#cccccc url(../assets/sj.png) no-repeat;
+        background-size: .25rem 1.11rem;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        border-radius: 100%;
+
+        &.next{
+          right: .1rem;
+          background-position: center -.53rem;
+        }
+        &.prev{
+          left: .1rem;
+          background-position: center .15rem;
+        }
+      }
+    }
 
     .detail-open-wrap__title{
       text-align: center;
@@ -118,6 +141,86 @@
         }
       }
     }
+
+    .detail-check-wrap__plan{
+      @color: #ff2800;
+
+      .detail-check-wrap__title{
+        font-size: .48rem;
+        color: @color;
+        margin-bottom: .1rem;
+      }
+      .detail-check-wrap__code{
+        background: #fff0b3;
+        width: 5rem;
+        height: 1.9rem;
+        margin: 0 auto;
+        border-radius: .08rem;
+        padding: .2rem;
+        box-sizing: border-box;
+
+        p{
+          font-size: .24rem;
+        }
+
+        span{
+          display: block;
+          font-size: .72rem;
+          color: @color;
+          margin: .1rem;
+        }
+        div{
+          color: #727272;
+          font-size: .2rem;
+        }
+      }
+    }
+
+
+    .detail-open-wrap__tips{
+      line-height: .4rem;
+      margin-bottom: .2rem;
+    }
+
+    .detail-end-wrap__plan{
+      width: 4rem;
+      margin: 0 auto;
+      font-size: .26rem;
+
+      .user-name{
+        display: flex;
+        align-items: center;
+        margin-bottom: .2rem;
+
+        .cover{
+          width: .65rem;
+          height: .65rem;
+          background: #999999;
+          border-radius: 100%;
+        }
+        .name{
+          margin-left: .15rem;
+        }
+      }
+
+      .user-info{
+        text-align: left;
+
+        label{
+          width: 1rem;
+          display: inline-block;
+          height: .4rem;
+          line-height: .4rem;
+        }
+
+        .code{
+          font-size: .48rem;
+        }
+      }
+    }
+
+
+
 
     .detail-open-wrap__handle{
       display: flex;
@@ -206,7 +309,6 @@
       .detail-expect-code{
         p{
           font-size: .48rem;
-          font-weight: bold;
         }
       }
 

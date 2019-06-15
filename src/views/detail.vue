@@ -26,7 +26,45 @@
           <p>进行中</p>
         </div>
       </div>
-      <div class="detail-open-wrap__plan">
+
+      <div class="detail-open-button">
+        <div class="next"></div>
+        <div class="prev"></div>
+      </div>
+
+      <div class="detail-check-wrap__plan">
+        <div class="detail-check-wrap__title">
+          恭喜您中奖啦!
+        </div>
+        <div class="detail-check-wrap__code">
+          <p>奖品兑换码</p>
+          <span>JDK385772</span>
+          <div>点击复制到剪贴板</div>
+        </div>
+      </div>
+
+      <div class="detail-end-wrap__plan" style="display:none;">
+        <div class="user-name">
+          <div class="cover"></div>
+          <div class="name">XDE***F EEF </div>
+        </div>
+        <ul class="user-info">
+          <li>
+            <label>时间:</label>
+            <span>2019-5-26 20:23:45</span>
+          </li>
+          <li>
+            <label>共参与:</label>
+            <span>3次</span>
+          </li>
+          <li>
+            <label>幸运码:</label>
+            <span class="code">102562256</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="detail-open-wrap__plan" style="display:none;">
         <div class="detail-open-wrap__progress">
           <i style="width: 50%"></i>
         </div>
@@ -45,8 +83,11 @@
           </li>
         </ul>
         <p class="detail-open-wrap__tips">
-          本活动每次消耗10钻石,可多次参加
+          本活动每次消耗10钻石,可多次参加 <br>
+          <!-- 本次活动目标已达成 <br>
+          激动人心的时刻就要到来啦! -->
         </p>
+
         <div class="detail-open-wrap__handle">
           <div class="detail-open-wrap__button_minus"></div>
           <input type="number" value="1">
