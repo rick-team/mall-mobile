@@ -15,7 +15,7 @@ import { swiper , swiperSlide } from 'vue-awesome-swiper'
 export default {
   name: 'indexHeader',
   props: {
-    banner: Object
+    banner: Array
   },
   data() {
     return {
