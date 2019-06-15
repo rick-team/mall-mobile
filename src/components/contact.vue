@@ -6,11 +6,11 @@
 }
 #contact div {
   width: 3.23rem;
-  margin: 0 auto;
   flex: flex;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin: 0 auto;
 }
 #contact div img {
   width: .7rem;
@@ -19,7 +19,7 @@
 </style>
 <template>
   <div id="contact">
-    <p>任何疑问，请联系客服：</p>
+    <p :style='{color: color}'>任何疑问，请联系客服：</p>
     <div>
       <img src='../assets/ic_bottom_fb.png' />
       <img src='../assets/ic_bottom_ins.png' />
@@ -35,7 +35,8 @@ export default {
     return {
       
     }
-  }
+  },
+  props:['color']
 }
 </script>
 

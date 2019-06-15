@@ -72,12 +72,12 @@
 <template>
   <div id="index" @click='qaShowBl=false'>
     <div class='qa_click' v-if='!qaShowBl' @click.stop="qaShowBl=true"><img src='../assets/qa_click.png'></div>
-    <indexHeader />
+    <indexHeader :banner='bannerphoto' />
     <winningMsg class='luckMsg' />
     <volume />
     <diamond />
     <lottery />
-    <contact />
+    <contact color='#fff' />
     <qa v-if='qaShowBl' />
     <div class='bottom_nav'>
       <div class='img left'>
@@ -85,7 +85,7 @@
       </div>
       <div class='use left'>
         <p>{{'Abudula ajaz hartanto'}}</p>
-        <router-link class='a_' to='/peopleCenter'>参与记录</router-link>
+        <router-link class='a_' :to="{path:'/peopleCenter'}">参与记录</router-link>
       </div>
       <div class='diamond right'>
         <p>{{99000}}</p>
@@ -105,11 +105,28 @@ import diamond from '@/components/index/diamond'
 import lottery from '@/components/index/lottery'
 import qa from '@/components/index/q_a'
 import contact from '@/components/contact'
+
+import img1 from '@/assets/banner_1.jpg'
+import img2 from '@/assets/banner_2.jpg'
 export default {
   name: 'index',
   data() {
       return {
-        qaShowBl: false
+        qaShowBl: false,
+        bannerphoto: [
+          {
+            src:img1
+          },
+          {
+            src:img2
+          },
+          {
+            src:img1
+          },
+          {
+            src:img2
+          }
+        ]
       }
   },
   methods: {
@@ -127,10 +144,6 @@ export default {
 </script>
 
 <style socped>
-#index {
-	width: 100%;
-	background: url(../assets/bg_1.jpg) center top / 100% auto;
-}
 .luckMsg {
 	width: 4.51rem;
 	height: 1.22rem;

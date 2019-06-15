@@ -1,4 +1,4 @@
-<style>
+<style socped>
 #qa {
   background-position: 0 50%;
   padding-top: .37rem;

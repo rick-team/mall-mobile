@@ -5,6 +5,7 @@ import store from './store/store'
 
 Vue.config.productionTip = false
 import '@/style/style.less'
+import 'swiper/dist/css/swiper.css'
 
 new Vue({
   router,
