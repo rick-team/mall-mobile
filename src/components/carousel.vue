@@ -27,19 +27,19 @@ export default {
         },
         paginationClickable: true,
         observer:true,//修改swiper自己或子元素时，自动初始化swiper 
-    　　observeParents:true,//修改swiper的父元素时，自动初始化swiper 
-    　　loop:true,
-    　　autoplay: {
-    　　　delay: 1500,
-    　　  disableOnInteraction: false
-    　　},
+        observeParents:true,//修改swiper的父元素时，自动初始化swiper 
+        loop:true,
+        autoplay: {
+          delay: 1500,
+          disableOnInteraction: false
+        },
         coverflow: {
-      　　rotate: 30,
-      　　stretch: 10,
-      　　depth: 60,
-      　　modifier: 2,
-      　　slideShadows : true
-      　}
+          rotate: 30,
+          stretch: 10,
+          depth: 60,
+          modifier: 2,
+          slideShadows : true
+        }
       },
       bannerphoto: [
         {

@@ -39,14 +39,12 @@
 <script>
 import { swiper , swiperSlide } from 'vue-awesome-swiper'
 require('swiper/dist/css/swiper.css')
-import img1 from '@/assets/img/banner_1.jpg'
-import img2 from '@/assets/img/banner_2.jpg'
 export default {
   name: 'indexHeader',
   data() {
     return {
       swiperOption: {
-    　　direction: 'vertical',
+        direction: 'vertical',
         mousewheel: true,
         autoplay: {
           delay:2500  //这里需要注意，如果想每2秒去自动切换，直接autoplay:2000是失效的，
