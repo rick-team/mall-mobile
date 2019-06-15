@@ -1,12 +1,17 @@
 <template>
-  <div id="volume">
-    volume
+  <div id="qa">
+    
   </div>
 </template>
 
 <script>
 export default {
-  name: 'volume'
+  name: 'qa',
+  data() {
+    return {
+      
+    }
+  }
 }
 </script>
 
