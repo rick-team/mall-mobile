@@ -37,12 +37,12 @@ export default {
 <style socped>
 #index {
 	width: 100%;
-	background: url(../assets/img/bg_1.jpg) center top / 100% auto;
+	background: url(../assets/bg_1.jpg) center top / 100% auto;
 }
 .luckMsg {
 	width: 4.51rem;
 	height: 1.22rem;
-	background: url(../assets/img/bg_showresult.png) center center / 100% 100%;
+	background: url(../assets/bg_showresult.png) center center / 100% 100%;
 	margin: 0.1rem auto .3rem;
 }
 </style>

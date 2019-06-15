@@ -9,7 +9,7 @@
 import indexTitle from '@/components/index/indexTitle'
 import indexList from '@/components/index/indexList'
 
-import goodsImg from '@/assets/img/prizeimage_small_1.png'
+import goodsImg from '@/assets/prizeimage_small_1.png'
 export default {
   name: 'lottery',
   data() {

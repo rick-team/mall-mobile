@@ -39,8 +39,8 @@
 <script>
 import { swiper , swiperSlide } from 'vue-awesome-swiper'
 require('swiper/dist/css/swiper.css')
-import img1 from '@/assets/img/banner_1.jpg'
-import img2 from '@/assets/img/banner_2.jpg'
+import img1 from '@/assets/banner_1.jpg'
+import img2 from '@/assets/banner_2.jpg'
 export default {
   name: 'indexHeader',
   data() {
