@@ -1,13 +1,14 @@
 <template>
   <div id="indexTitle">
     <div class='title'>
-        <span>卷</span>区
+        <span>{{name}}</span>区
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  props:['name'],
   name: 'indexTitle'
 }
 </script>
@@ -21,8 +22,12 @@ export default {
     box-sizing: border-box;
     text-align: center;
     line-height: .6rem;
-    font-size: .5ren;
+    font-size: .35rem;
     color: #fff;
+    font-family: '黑体';
+    font-weight: bold;
+    margin: 0 auto .15rem;
+    border-radius: .34rem;
 }
 .title span {
     color: #fff600;

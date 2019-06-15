@@ -30,7 +30,7 @@ export default {
     　　observeParents:true,//修改swiper的父元素时，自动初始化swiper 
     　　loop:true,
     　　autoplay: {
-    　　　delay: 2000,
+    　　　delay: 1500,
     　　  disableOnInteraction: false
     　　},
         coverflow: {
