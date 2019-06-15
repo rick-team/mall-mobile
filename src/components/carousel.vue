@@ -1,5 +1,5 @@
 <template>
-  <div id="index">
+  <div id="carousel">
     <swiper :options="swiperOption">
       <swiper-slide v-for="(items,index) in bannerphoto" :key="index">
         <img style='width:100%' :src="items.src" alt="">
@@ -11,11 +11,11 @@
 
 <script>
 import { swiper , swiperSlide } from 'vue-awesome-swiper'
-import img1 from '@/assets/img/banner_1.jpg'
-import img2 from '@/assets/img/banner_2.jpg'
+import img1 from '@/assets/banner_1.jpg'
+import img2 from '@/assets/banner_2.jpg'
 require('swiper/dist/css/swiper.css')
 export default {
-  name: 'indexHeader',
+  name: 'carousel',
   data() {
     return {
       swiperOption: {

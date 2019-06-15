@@ -47,7 +47,7 @@
   height: .65rem;
   bottom: -.09rem;
   right: 0;
-  background: url('../../assets/img/progressbar_topmask.png') center center / 100% 100%;
+  background: url('../../assets/progressbar_topmask.png') center center / 100% 100%;
 }
 .surface .people {
   width: 1.05rem;
@@ -92,7 +92,7 @@
   font-family: '黑体';
 }
 .dateTimeIocnBg {
-  background: url('../../assets/img/clock.gif') .15rem center no-repeat;
+  background: url('../../assets/clock.gif') .15rem center no-repeat;
   background-size: auto 80%;
 }
 </style>

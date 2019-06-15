@@ -12,6 +12,10 @@ export default new Router({
       path: '/',
       name: 'index',
       component: index
+    },
+    {
+      path: '/detail',
+      component: () => import('@/views/detail')
     }
   ]
 })
