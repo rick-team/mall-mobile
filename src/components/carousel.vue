@@ -1,7 +1,7 @@
 <template>
   <div id="index">
     <swiper :options="swiperOption">
-      <swiper-slide v-for="(items,index) in bannerphoto" :key="index">
+      <swiper-slide v-for="(items,index) in banner" :key="index">
         <img style='width:100%' :src="items.src" alt="">
       </swiper-slide>
        <div class="swiper-pagination" id="pagination" slot="pagination"></div>
@@ -11,11 +11,12 @@
 
 <script>
 import { swiper , swiperSlide } from 'vue-awesome-swiper'
-import img1 from '@/assets/banner_1.jpg'
-import img2 from '@/assets/banner_2.jpg'
-require('swiper/dist/css/swiper.css')
+
 export default {
   name: 'indexHeader',
+  props: {
+    banner: Object
+  },
   data() {
     return {
       swiperOption: {
@@ -41,24 +42,7 @@ export default {
       　　slideShadows : true
       　}
       },
-      bannerphoto: [
-        {
-          src:img1
-        },
-        {
-          src:img2
-        },
-        {
-          src:img1
-        },
-        {
-          src:img2
-        }
-      ]
     }
-  },
-  methods: {
-    
   },
   components: {
     swiper,

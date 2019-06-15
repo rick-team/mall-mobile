@@ -1,6 +1,6 @@
 <template>
-  <div id="index">
-      <indexHeader />
+  <div>
+      <indexHeader :banner = banner />
 			<winningMsg class='luckMsg' />
 			<volume />
       <diamond />
@@ -18,11 +18,18 @@ export default {
   name: 'index',
   data() {
       return {
-
+        banner: [
+          {
+            src: require('@/assets/banner_1.jpg')
+          },
+          {
+            src: require('@/assets/banner_2.jpg')
+          },
+          {
+            src: require('@/assets/banner_1.jpg')
+          }
+        ]
       }
-  },
-  methdos: {
-
   },
   components: {
 		indexHeader,
@@ -35,10 +42,6 @@ export default {
 </script>
 
 <style socped>
-#index {
-	width: 100%;
-	background: url(../assets/bg_1.jpg) center top / 100% auto;
-}
 .luckMsg {
 	width: 4.51rem;
 	height: 1.22rem;
