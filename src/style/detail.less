@@ -1,3 +1,6 @@
+@danger: #ff2074;
+@primay: #00a8ff;
+
 .detail{
 
   img{
@@ -14,7 +17,7 @@
 
     .detail-price{
       line-height: .5rem;
-      color: #ff2074;
+      color: @danger;
       font-size: .36rem;
       span{
         font-size: .21rem;
@@ -37,9 +40,34 @@
     border-radius: .08rem;
     background: #FFF;
     padding: .3rem;
+    margin-bottom: .2rem;
+    position: relative;
+
+    .detail-open-button{
+      div{
+        width: .75rem;
+        height: .75rem;
+        background:#cccccc url(../assets/sj.png) no-repeat;
+        background-size: .25rem 1.11rem;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        border-radius: 100%;
+
+        &.next{
+          right: .1rem;
+          background-position: center -.53rem;
+        }
+        &.prev{
+          left: .1rem;
+          background-position: center .15rem;
+        }
+      }
+    }
 
     .detail-open-wrap__title{
       text-align: center;
+      margin-bottom: .3rem;
 
       &>div{
         display: inline-block;
@@ -57,14 +85,268 @@
           top: 0;
           transform: translateX(100%);
           color: #FFF;
-          background: #ff2074;
+          background: @danger;
           font-size: 0.18rem;
           width: 1.15rem;
           height: .3rem;
         }
       }
     }
+
+    .detail-open-wrap__progress{
+      width: 4.9rem;
+      height: .15rem;
+      background: #d5d5d5;
+      border-radius: .15rem;
+      margin: 0 auto;
+      overflow: hidden;
+
+      i{
+        background: @danger;
+        height: inherit;
+        display: block;
+      }
+    }
+
+    .detail-open-wrap__parms{
+      width: 4.9rem;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+
+      li{
+        margin-bottom: .2rem;
+
+        span{
+          font-size: .18rem;
+          line-height: .4rem;
+          color: #686868;
+        }
+
+        p{
+          font-size: .21rem;
+        }
+
+        &:nth-of-type(1){
+          text-align: left;
+          span{
+            color: @danger;
+          }
+        }
+        &:nth-last-of-type(1){
+          text-align: right;
+          span{
+            color: @primay;
+          }
+        }
+      }
+    }
+
+    .detail-check-wrap__plan{
+      @color: #ff2800;
+
+      .detail-check-wrap__title{
+        font-size: .48rem;
+        color: @color;
+        margin-bottom: .1rem;
+      }
+      .detail-check-wrap__code{
+        background: #fff0b3;
+        width: 5rem;
+        height: 1.9rem;
+        margin: 0 auto;
+        border-radius: .08rem;
+        padding: .2rem;
+        box-sizing: border-box;
+
+        p{
+          font-size: .24rem;
+        }
+
+        span{
+          display: block;
+          font-size: .72rem;
+          color: @color;
+          margin: .1rem;
+        }
+        div{
+          color: #727272;
+          font-size: .2rem;
+        }
+      }
+    }
+
+
+    .detail-open-wrap__tips{
+      line-height: .4rem;
+      margin-bottom: .2rem;
+    }
+
+    .detail-end-wrap__plan{
+      width: 4rem;
+      margin: 0 auto;
+      font-size: .26rem;
+
+      .user-name{
+        display: flex;
+        align-items: center;
+        margin-bottom: .2rem;
+
+        .cover{
+          width: .65rem;
+          height: .65rem;
+          background: #999999;
+          border-radius: 100%;
+        }
+        .name{
+          margin-left: .15rem;
+        }
+      }
+
+      .user-info{
+        text-align: left;
+
+        label{
+          width: 1rem;
+          display: inline-block;
+          height: .4rem;
+          line-height: .4rem;
+        }
+
+        .code{
+          font-size: .48rem;
+        }
+      }
+    }
+
+
+
+
+    .detail-open-wrap__handle{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: .1rem 0;
+
+      .button{
+        width: .8rem;
+        height: .8rem;
+        background-size: .8rem;
+      }
+      input{
+        width: .7rem;
+        height: .55rem;
+        border-radius: .04rem;
+        background: #d5d5d5;
+        color: #000;
+        border: none;
+        margin: 0 .1rem;
+        text-align: center;
+        font-size: .325rem;
+      }
+      .detail-open-wrap__button_minus{
+        background: url('../assets/button_minus.png') no-repeat;
+        .button;
+      }
+      .detail-open-wrap__button_plus{
+        background: url('../assets/button_plus.png') no-repeat;
+        .button;
+      }
+      .detail-open-wrap-submit{
+        width: 2.8rem;
+        height: .88rem;
+        background: @danger;
+        color: #FFF;
+        margin-left: .2rem;
+        border-radius: .88rem;
+        font-size: .446rem;
+      }
+    }
+    
+    .detail-open-timeout{
+      font-size: .21rem;
+      span{
+        font-size: .27rem;
+      }
+      i{
+        width: .18rem;
+        height: .18rem;
+        background: url(../assets/clock.gif) no-repeat;
+        background-size: .18rem;
+        display: inline-block;
+      }
+    }
   }
 
+  .detail-expect{
+    border-radius: .08rem;
+    background: #FFF;
+    padding: .3rem;
 
+    .detail-expect-head{
+      font-size: .2rem;
+
+      span{
+        color: @danger;
+        font-size: .24rem
+      }
+    }
+    .detail-expect-body{
+      display: flex;
+      justify-content: space-between;
+      padding: .2rem .6rem;
+
+      span{
+        font-size: .2rem;
+        display: block;
+        margin-bottom: .2rem;
+      }
+      p{
+        font-size: .3rem;
+        height: .6rem;
+        line-height: .6rem;
+      }
+      .detail-expect-code{
+        p{
+          font-size: .48rem;
+        }
+      }
+
+    }
+  }
+
+  .detail-open-list{
+    padding: .4rem;
+    color: #FFF;
+
+    .detail-open-list-title{
+      font-size: .36rem;
+      margin-bottom: .2rem;
+    }
+
+    dl{
+      display: flex;
+      margin-bottom: .2rem;
+
+      dt{
+        width: .65rem;
+        height: .65rem;
+        background: fade(#FFF, 65%);
+        border-radius: 100%;
+      }
+      dd{
+        margin-left: .15rem;
+        text-align: left;
+        font-size: .26rem;
+        line-height: .3rem;
+        .name{
+          color: #00fdb3;
+        }
+        span{
+          color: @danger;
+        }
+      }
+
+    }
+  }
 }
