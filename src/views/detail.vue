@@ -1,6 +1,7 @@
 <template>
   <div class="detail">
     <indexHeader :banner = banner />
+
     <div class="detail-info">
       <div class="detail-price">
         <span>Rp</span>
@@ -17,6 +18,7 @@
         <p>■ AT Field</p>
       </div>
     </div>
+
     <div class="detail-open-wrap">
       <div class="detail-open-wrap__title">
         <div>
@@ -25,7 +27,9 @@
         </div>
       </div>
       <div class="detail-open-wrap__plan">
-        <div class="detail-open-wrap__progress"></div>
+        <div class="detail-open-wrap__progress">
+          <i style="width: 50%"></i>
+        </div>
         <ul class="detail-open-wrap__parms">
           <li>
             <span>523</span>
@@ -44,12 +48,46 @@
           本活动每次消耗10钻石,可多次参加
         </p>
         <div class="detail-open-wrap__handle">
-          <div class="detail-open-wrap__handle___remove"></div>
+          <div class="detail-open-wrap__button_minus"></div>
           <input type="number" value="1">
-          <div class="detail-open-wrap__handle___add"></div>
+          <div class="detail-open-wrap__button_plus"></div>
           <button class="detail-open-wrap-submit">立即参加</button>
         </div>
+        <div class="detail-open-timeout">
+          距离结束剩余 <i></i> <span>01：05：55</span>
+        </div>
       </div>
+    </div>
+
+    <div class="detail-expect">
+      <div class="detail-expect-head">
+        您  已参与了 <span>0</span> 次本期活动 
+      </div>
+      <div class="detail-expect-body">
+        <div class="detail-expect-time">
+          <span>参与时间</span>
+          <p>2019-5-11 09:56:45</p>
+          <p>2019-5-11 09:56:45</p>
+        </div>
+        <div class="detail-expect-code">
+          <span>幸运码</span>
+          <p>102689566</p>
+          <p>102689566</p>
+        </div>
+      </div> 
+    </div>
+
+    <div class="detail-open-list">
+      <div class="detail-open-list-title">参与记录</div>
+      <dl v-for="item in 8">
+        <dt></dt>
+        <dd>
+          <div class="name">
+            XDEKKDE DEFEF EEF 
+          </div>
+          <p>参与了 <span>2</span> 次  2019-5-11 09:56:45</p>
+        </dd>
+      </dl>
     </div>
   </div>
 </template>
