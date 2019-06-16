@@ -5,14 +5,30 @@
 </template>
 
 <script>
-export default {
-  name: 'App'
+function getRequest(url) {
+  const requestData = {};
+  if (url.indexOf("?") != -1) {
+    let str = url.substr(1);
+    let strs = str.split("&");
+    for (var i = 0; i < strs.length; i++) {
+      requestData[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+    }
+  }
+  return requestData;
 }
+
+export default {
+  name: "App",
+  created() {
+    const locationBar = getRequest(location.search)
+    locationBar.token && this.$store.commit('saveToken', locationBar.token)
+  }
+};
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
