@@ -1,11 +1,11 @@
-<style socped>
+<style scoped>
 #qa {
   background-position: 0 50%;
   padding-top: .37rem;
   position: absolute;
   top:0;
   left: 0;
-  z-index: 20;
+  z-index: 101;
   width: 100%;
 }
 .qa_bg {
@@ -15,12 +15,13 @@
   background: #d5d5d5;
   height: 11rem;
   z-index: 0;
+  min-height: calc(100vh - 1.51rem);
 }
 .content {
   margin: 0 auto;
   width: 95%;
 }
-.content .top {
+#qa .content .top {
   color: #fff;
   font-size: .4rem;
   text-align: left;
@@ -64,6 +65,7 @@
   width: 5.79rem;
   box-sizing: border-box;
 }
+
 </style>
 <template>
   <div id="qa">
