@@ -1,4 +1,4 @@
-<style>
+<style socped>
 #index {
   padding-bottom: 1.5rem;
 }
@@ -9,7 +9,7 @@
   background: #d398f8;
   padding: 0 .2rem;
   box-sizing: border-box;
-  z-index: 999;
+  z-index: 100;
   bottom: 0;
 }
 .left{
@@ -21,8 +21,10 @@
 .bottom_nav .img {
   line-height: 1.17rem;
   margin-right: .1rem;
+  width: .85rem;
 }
 .bottom_nav .img img {
+  width: .85rem;
   display: inline-block;
   vertical-align: middle;
 }
@@ -61,17 +63,26 @@
   color: #000;
 }
 .qa_click {
-  position: fixed;
+  position: absolute;
   right: 0;
   top: 0;
   z-index: 99999;
   width: 1.26rem;
 }
+
+.qa_click img {
+  width: 100%;
+}
+
+body.modal-open {
+  position: fixed;
+  width: 100%;
+}
 </style>
 
 <template>
-  <div id="index" @click='qaShowBl=false'>
-    <div class='qa_click' v-if='!qaShowBl' @click.stop="qaShowBl=true"><img src='../assets/qa_click.png'></div>
+  <div id="index" @click='closeQA'>
+    <div class='qa_click' v-if='!qaShowBl' @click.stop="showQA"><img src='../assets/qa_click.png'></div>
     <indexHeader :banner='bannerphoto' />
     <winningMsg class='luckMsg' />
     <volume />
@@ -130,6 +141,14 @@ export default {
       }
   },
   methods: {
+    showQA() {
+      this.qaShowBl = true;
+      document.getElementsByTagName('body')[0].classList.add("modal-open");
+    },
+    closeQA() {
+      this.qaShowBl = false;
+      document.getElementsByTagName('body')[0].classList.remove("modal-open");
+    }
   },
   components: {
 		indexHeader,

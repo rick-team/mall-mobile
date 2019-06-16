@@ -28,6 +28,8 @@ export default {
     font-weight: bold;
     margin: 0 auto .15rem;
     border-radius: .34rem;
+    padding: 0.05rem 0.15rem;
+    box-sizing: border-box; 
 }
 .title span {
     color: #fff600;

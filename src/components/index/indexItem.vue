@@ -1,9 +1,9 @@
 
-<style>
+<style scoped>
 #indexItem {
   position: relative;
   width: 3.28rem;
-  height: 4.17rem;
+  height: 4.27rem;
   background: rgba(255, 255, 255, .1);
   border-radius: .12rem;
   box-sizing: border-box;
@@ -20,6 +20,8 @@
   border-radius: .05rem;
   font-size: .19rem;
   font-weight: bold;
+  box-sizing: border-box;
+  padding: 0.03rem 0.15rem;
 }
 .period span{
   color: #fff600;
@@ -63,13 +65,13 @@
   font-weight: bold;
 }
 .surface .schedule {
-  padding-top: .19rem;
   float: left;
   width: 1.95rem;
   height: .32rem;
   font-size: .18rem;
   line-height: .32rem;
   color: #fff;
+  padding: 0.23rem 0 0;
 }
 .progressBar {
   background: #259bf7;
@@ -83,24 +85,31 @@
 }
 .dateTime {
   width: 1.52rem;
-  height: .22rem;
   margin: .1rem auto 0;
   background: rgba(255, 255, 255, .1);
-  line-height: .22rem;
   color: #fff;
-  font-size: .19rem;
   font-family: '黑体';
+  box-sizing: border-box;
 }
 .dateTimeIocnBg {
   background: url('../../assets/clock.gif') .15rem center no-repeat;
   background-size: auto 80%;
+  font-size: 0;
+}
+.dateTimeIocnBg span{
+  padding: 0.04rem 0.15rem;
+  box-sizing: border-box;  
+  display: inline-block;
+  line-height: .22rem;
+  height: .22rem;
+  font-size: .19rem;
 }
 </style>
 
 <template>
   <div id="indexItem">
     <div class='period'>
-      第<span>{{infor.period}}</span>期
+      第<span> {{infor.period}} </span>期
     </div>
     <div class='goodsImg'>
       <img :src='infor.imgSrc' />
@@ -119,7 +128,7 @@
     </div>
     <div class='dateTime'>
       <div class='dateTimeIocnBg'>
-        {{infor.dateTime}}
+        <span>{{infor.dateTime}}</span>
       </div>
     </div>
   </div>

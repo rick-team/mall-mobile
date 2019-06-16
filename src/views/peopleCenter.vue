@@ -1,4 +1,4 @@
-<style socped>
+<style scoped>
 .bg {
   position: absolute;
   top: 2.3rem;
@@ -114,7 +114,7 @@
 .listContainer .list li .left{
 		width: 3.9rem;
 		height: .92rem;
-		padding: .09rem .22rem;
+		padding: .14rem .22rem;
 		font-size: .19rem;
 		text-align: left;
 		box-sizing: border-box;
@@ -125,6 +125,7 @@
 }
 .listContainer .list li .left p:last-child .time{
 	margin-right: .1rem;
+	vertical-align: middle;
 }
 
 .listContainer .list li .left p:last-child .btn {
@@ -136,6 +137,10 @@
 	color: #fff;
 	font-size: .19rem;
 	line-height: .22rem;
+	vertical-align: middle;
+	box-sizing: border-box;
+	vertical-align: middle;
+  padding: 0.03rem 0.15rem;
 }
 .listContainer .list li .right {
 	width: 2.2rem;
@@ -228,7 +233,10 @@
 .right {
 	float: right;
 }
-
+body.modal-open {
+  position: fixed;
+  width: 100%;
+}
 </style>
 <template>
   <div id="peopleCenter">
@@ -248,7 +256,7 @@
 						<div class='diamond left'>
 							<p>{{99000}}</p>
 						</div>
-						<p class='a_ left' @click.stop='rechargeShow = true'>立即充值</p>
+						<p class='a_ left' @click.stop='rechargeShowFn'>立即充值</p>
 					</div>
 				</div>
 			</div>
@@ -312,7 +320,7 @@
 				<contact color='#000' />
 			</div>
 
-			<div v-if='rechargeShow' @click="rechargeShow = false" class='rechargeContainer'>
+			<div v-if='rechargeShow' @click="rechargeCloseFn" class='rechargeContainer'>
 				<div class='recharge' @click.stop=''>
 					<p class='p_top'>请选择充值方式：</p>
 					<div class='pay'>
@@ -342,7 +350,17 @@ export default {
 			rechargeShow:false,
 			listShow:true
     }
-	},
+  },
+  methods:{
+    rechargeShowFn() {
+      this.rechargeShow = true;
+      document.getElementsByTagName('body')[0].classList.add("modal-open");
+    },
+    rechargeCloseFn() {
+      this.rechargeShow = false;
+      document.getElementsByTagName('body')[0].classList.remove("modal-open");
+    }
+  },
 	components: {
 		contact,
 	},
