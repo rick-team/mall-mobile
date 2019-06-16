@@ -117,30 +117,39 @@ import lottery from '@/components/index/lottery'
 import qa from '@/components/index/q_a'
 import contact from '@/components/contact'
 
-import img1 from '@/assets/banner_1.jpg'
-import img2 from '@/assets/banner_2.jpg'
+import { mapActions } from 'vuex'
+
 export default {
   name: 'index',
   data() {
       return {
         qaShowBl: false,
-        bannerphoto: [
-          {
-            src:img1
-          },
-          {
-            src:img2
-          },
-          {
-            src:img1
-          },
-          {
-            src:img2
-          }
-        ]
+        bannerphoto: []
       }
   },
+  mounted(){
+    this.getCarousel({
+      lang: this.$store.state.lang
+    }).then(({data}) => {
+      this.bannerphoto = data
+    })
+
+    this.getAwardRecord({
+      lang: this.$store.state.lang
+    }).then(({data}) => {
+      console.log(data)
+    })
+
+    this.$store.dispatch('getActivityDetail').then(({data}) => {
+      console.log(data)
+    })
+
+  },
   methods: {
+    ...mapActions([
+      'getCarousel',
+      'getAwardRecord'
+    ]),
     showQA() {
       this.qaShowBl = true;
       document.getElementsByTagName('body')[0].classList.add("modal-open");

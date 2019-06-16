@@ -144,10 +144,10 @@ export default {
     return {
       banner: [
         {
-          src: require('@/assets/prize_detail_1.jpg')
+          img: require('@/assets/prize_detail_1.jpg')
         },
         {
-          src: require('@/assets/prize_detail_1.jpg')
+          img: require('@/assets/prize_detail_1.jpg')
         },
       ]
     }

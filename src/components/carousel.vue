@@ -2,7 +2,7 @@
   <div id="carousel">
     <swiper :options="swiperOption">
       <swiper-slide v-for="(items,index) in banner" :key="index">
-        <img style='width:100%' :src="items.src" alt="">
+        <img style='width:100%' :src="items.img" alt="">
       </swiper-slide>
        <div class="swiper-pagination" id="pagination" slot="pagination"></div>
     </swiper>

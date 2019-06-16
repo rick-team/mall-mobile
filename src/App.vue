@@ -22,6 +22,9 @@ export default {
   created() {
     const locationBar = getRequest(location.search)
     locationBar.token && this.$store.commit('saveToken', locationBar.token)
+    const CHINA = '3'
+    const lang = parseInt(locationBar.lang || CHINA)
+    this.$store.commit('saveLang', lang)
   }
 };
 </script>
