@@ -92,17 +92,17 @@ body.modal-open {
     <qa v-if='qaShowBl' />
     <div class='bottom_nav'>
       <div class='img left'>
-        <img src='../assets/usericon_default.png' />
+        <img :src='userInfo.imgUrl' />
       </div>
       <div class='use left'>
-        <p>{{'Abudula ajaz hartanto'}}</p>
+        <p>{{userInfo.nickName}}</p>
         <router-link class='a_' :to="{path:'/peopleCenter'}">{{ $t("record") }}</router-link>
       </div>
       <div class='diamond right'>
-        <p>{{99000}}</p>
+        <p>{{diamond.diamond}}</p>
       </div>
       <div class='kupon right'>
-        <p>{{99200}}</p>
+        <p>{{diamond.ticket}}</p>
       </div>
     </div>
   </div>
@@ -124,32 +124,30 @@ export default {
   data() {
       return {
         qaShowBl: false,
+        diamond: {},
+        userInfo: {},
         bannerphoto: []
       }
   },
   mounted(){
-    this.getCarousel({
+    this.$store.dispatch('getCarousel', {
       lang: this.$store.state.lang
     }).then(({data}) => {
       this.bannerphoto = data
-    })
-
-    this.getAwardRecord({
-      lang: this.$store.state.lang
-    }).then(({data}) => {
-      console.log(data)
     })
 
     this.$store.dispatch('getActivityDetail').then(({data}) => {
       console.log(data)
     })
 
+    this.$store.dispatch('getUserInfo').then(({data}) => {
+      this.diamond = data.diamond
+      this.userInfo = data.userInfo
+      console.log(data)
+    })
+
   },
   methods: {
-    ...mapActions([
-      'getCarousel',
-      'getAwardRecord'
-    ]),
     showQA() {
       this.qaShowBl = true;
       document.getElementsByTagName('body')[0].classList.add("modal-open");

@@ -28,7 +28,7 @@
     <swiper class="winlist" :options="swiperOption" ref="winlist">
       <swiper-slide  v-for="(item,index) in msgList" :key="index" >
         <div class='slide'>
-          <p>恭喜：用户{{item.name}} 获得 {{item.article}} 价值 {{item.money}}</p>
+          <p>{{item}}</p>
           <p class='bottom'>注大家好运连连，把把都中</p>
         </div>
       </swiper-slide>
@@ -51,27 +51,15 @@ export default {
         },
         loop: true
       },
-      msgList:[
-        {
-          name:'XS000D00',
-          article:'HUA WEI MATE 20 RPO',
-          money:'3000'
-        },
-        {
-          name:'XS000D0011',
-          article:'HUA WEI MATE 20 RPO222',
-          money:'4000'
-        },
-        {
-          name:'XS000D0022',
-          article:'XIAO MI 8 MATE 30 RPO',
-          money:'5000'
-        }
-      ]
+      msgList: []
     }
   },
-  methods: {
-    
+  created(){
+    this.$store.dispatch('getAwardRecord', {
+      lang: this.$store.state.lang
+    }).then(({data}) => {
+      this.msgList = data
+    })
   },
   components: {
     swiper,

@@ -1,10 +1,10 @@
 import axios from 'axios'
 import store from '@/store/store'
 
-const baseURL = ''
+// const baseURL = 'http://149.129.84.7/'
 
 const server = axios.create({
-  baseURL: baseURL,
+  baseURL: '',
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded'
   }
