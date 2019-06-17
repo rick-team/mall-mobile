@@ -1,6 +1,6 @@
 <template>
   <div id="volume">
-    <indexTitle name='卷' />
+    <indexTitle :name='$t("roll")' />
     <indexList :itemlist='list' />
   </div>
 </template>

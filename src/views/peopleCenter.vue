@@ -256,24 +256,24 @@ body.modal-open {
 						<div class='diamond left'>
 							<p>{{99000}}</p>
 						</div>
-						<p class='a_ left' @click.stop='rechargeShowFn'>立即充值</p>
+						<p class='a_ left' @click.stop='rechargeShowFn'>{{$t("topUp")}}</p>
 					</div>
 				</div>
 			</div>
 			<div class='listContainer'>
 				<div class='box'>
 					<div class='nav clearfix'>
-						<p class='left' @click='listShow=false' :class='{on:!listShow}'><span>我的中奖记录</span></p>
-						<p class='left' @click='listShow=true' :class='{on:listShow}'><span>我的全部记录</span></p>
+						<p class='left' @click='listShow=false' :class='{on:!listShow}'><span>{{$t("myAward")}}</span></p>
+						<p class='left' @click='listShow=true' :class='{on:listShow}'><span>{{$t("allAward")}}</span></p>
 					</div>
 					<div class='list_lucky list' v-if='!listShow'>
 						<ul>
 							<li>
 								<div class='left'>
-									<p>第3期 整个雅加达北区我最帅摩托 送3个头盔4个轮胎5个刹车</p>
+									<p>{{$t("no")}}3{{$t("phase")}} 整个雅加达北区我最帅摩托 送3个头盔4个轮胎5个刹车</p>
 									<p><span class=time>{{'2019-5-11 09:56:45'}}</span><span class='btn'>进行中</span></p>
 								</div>
-								<div class='right'>参与{{}}次</div>
+								<div class='right'>{{$t("inInvolved")}}3{{$t("inow")}}</div>
 							</li>
 							<li>
 								<div class='left'>
@@ -322,17 +322,17 @@ body.modal-open {
 
 			<div v-if='rechargeShow' @click="rechargeCloseFn" class='rechargeContainer'>
 				<div class='recharge' @click.stop=''>
-					<p class='p_top'>请选择充值方式：</p>
+					<p class='p_top'>{{$t("topUpType")}}</p>
 					<div class='pay'>
 						<img src='../assets/button_gpay.png' />
 						<img src='../assets/button_lazada.png' />
 					</div>
-					<p class='p_center'>你还可以输入兑奖码</p>
+					<p class='p_center'>{{$t("inputCode")}}</p>
 					<div class='inputDiv'>
 						<input type='text' />
 					</div>
-					<p class='p_bottom'>*礼品兑换码可以从多种渠道获得，详情请咨询客服</p>
-					<div class='btnDiv'>兑换</div>
+					<p class='p_bottom'>{{$t("serviceTips")}}</p>
+					<div class='btnDiv'>{{$t("exchange")}}</div>
 				</div>
 			</div>
 		</div>

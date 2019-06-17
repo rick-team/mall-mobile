@@ -1,7 +1,7 @@
 <template>
   <div id="indexTitle">
     <div class='title'>
-        <span>{{name}}</span>区
+        <span>{{name}}</span>{{$t('area')}}
     </div>
   </div>
 </template>

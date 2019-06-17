@@ -19,7 +19,7 @@
 </style>
 <template>
   <div id="contact">
-    <p :style='{color: color}'>任何疑问，请联系客服：</p>
+    <p :style='{color: color}'>{{$t("service")}}</p>
     <div>
       <img src='../assets/ic_bottom_fb.png' />
       <img src='../assets/ic_bottom_ins.png' />

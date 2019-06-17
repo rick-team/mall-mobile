@@ -14,7 +14,7 @@
   top: .07rem;
   left: .07rem;
   background: #7435a7;
-  width: 1.06rem;
+  /* width: 1.06rem; */
   height: .32rem;
   line-height: .32rem;
   border-radius: .05rem;
@@ -109,7 +109,7 @@
 <template>
   <div id="indexItem">
     <div class='period'>
-      第<span> {{infor.period}} </span>期
+      {{$t("no")}}<span> {{infor.period}} </span>{{$t("phase")}}
     </div>
     <div class='goodsImg'>
       <img :src='infor.imgSrc' />
@@ -118,11 +118,11 @@
       <div class='progressBar' :style="{width: infor.schedule + '%'}"></div>
       <div class='surface clearfix'>
         <div class='people'>
-          <span>参与人数</span><br>
+          <span>{{$t('participant')}}</span><br>
           <span>{{infor.people}}</span>
         </div>
         <div class='schedule'>
-          开奖进度{{infor.schedule}}
+          {{$t('lotterySchedule')}}{{infor.schedule}}
         </div>
       </div>
     </div>

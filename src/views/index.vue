@@ -96,7 +96,7 @@ body.modal-open {
       </div>
       <div class='use left'>
         <p>{{'Abudula ajaz hartanto'}}</p>
-        <router-link class='a_' :to="{path:'/peopleCenter'}">参与记录</router-link>
+        <router-link class='a_' :to="{path:'/peopleCenter'}">{{ $t("record") }}</router-link>
       </div>
       <div class='diamond right'>
         <p>{{99000}}</p>

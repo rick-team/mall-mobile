@@ -1,6 +1,6 @@
 <template>
   <div id="diamond">
-    <indexTitle name='钻石' />
+    <indexTitle :name='$t("masonry")' />
     <indexList :itemlist='list' />
   </div>
 </template>

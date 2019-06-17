@@ -22,8 +22,10 @@
     <div class="detail-open-wrap">
       <div class="detail-open-wrap__title">
         <div>
-          第<span>3</span>期
-          <p>进行中</p>
+          {{$t("no")}}<span>3</span>{{$t("phase")}}
+          <p>{{$t("ongoing")}}</p>
+          <!-- <p>{{$t("inTheLottery")}}</p>
+          <p>{{$t("hasTheLottery")}}</p> -->
         </div>
       </div>
 
@@ -34,12 +36,12 @@
 
       <div class="detail-check-wrap__plan">
         <div class="detail-check-wrap__title">
-          恭喜您中奖啦!
+          <p>{{$t("openAwardMsg")}}</p>
         </div>
         <div class="detail-check-wrap__code">
-          <p>奖品兑换码</p>
+          <p>{{$t("changeCode")}}</p>
           <span>JDK385772</span>
-          <div>点击复制到剪贴板</div>
+          <div>{{$t("tapCopy")}}</div>
         </div>
       </div>
 
@@ -50,15 +52,15 @@
         </div>
         <ul class="user-info">
           <li>
-            <label>时间:</label>
+            <label>{{$t("time")}}:</label>
             <span>2019-5-26 20:23:45</span>
           </li>
           <li>
-            <label>共参与:</label>
+            <label>{{$t("involved")}}:</label>
             <span>3次</span>
           </li>
           <li>
-            <label>幸运码:</label>
+            <label>{{$t("luckyCode")}}:</label>
             <span class="code">102562256</span>
           </li>
         </ul>
@@ -71,47 +73,48 @@
         <ul class="detail-open-wrap__parms">
           <li>
             <span>523</span>
-            <p>已参与次数</p>
+            <p>{{$t("alreadyNum")}}</p>
           </li>
           <li>
             <span>1000</span>
-            <p>目标次数</p>
+            <p>{{$t("expectNum")}}</p>
           </li>
           <li>
             <span>477</span>
-            <p>剩余次数</p>
+            <p>{{$t("remainingNum")}}</p>
           </li>
         </ul>
         <p class="detail-open-wrap__tips">
-          本活动每次消耗10钻石,可多次参加 <br>
+          {{$t("activityTips")}}
+          <!-- {{$t("openActivityTips")}} -->
           <!-- 本次活动目标已达成 <br>
           激动人心的时刻就要到来啦! -->
         </p>
-
+        
         <div class="detail-open-wrap__handle">
           <div class="detail-open-wrap__button_minus"></div>
           <input type="number" value="1">
           <div class="detail-open-wrap__button_plus"></div>
-          <button class="detail-open-wrap-submit">立即参加</button>
+          <button class="detail-open-wrap-submit">{{$t("submit")}}</button>
         </div>
         <div class="detail-open-timeout">
-          距离结束剩余 <i></i> <span>01：05：55</span>
+          {{$t("timeEnd")}} <i></i> <span>01：05：55</span>
         </div>
       </div>
     </div>
 
     <div class="detail-expect">
       <div class="detail-expect-head">
-        您  已参与了 <span>0</span> 次本期活动 
+        {{$t("youParticipate")}} <span>0</span> {{$t("theActivity")}} 
       </div>
       <div class="detail-expect-body">
         <div class="detail-expect-time">
-          <span>参与时间</span>
+          <span>{{$t("involvedTime")}}</span>
           <p>2019-5-11 09:56:45</p>
           <p>2019-5-11 09:56:45</p>
         </div>
         <div class="detail-expect-code">
-          <span>幸运码</span>
+          <span>{{$t("luckyCode")}}</span>
           <p>102689566</p>
           <p>102689566</p>
         </div>
@@ -119,14 +122,14 @@
     </div>
 
     <div class="detail-open-list">
-      <div class="detail-open-list-title">参与记录</div>
+      <div class="detail-open-list-title">{{$t("record")}}</div>
       <dl v-for="item in 8">
         <dt></dt>
         <dd>
           <div class="name">
             XDEKKDE DEFEF EEF 
           </div>
-          <p>参与了 <span>2</span> 次  2019-5-11 09:56:45</p>
+          <p>{{$t("inInvolved")}} <span>2</span> {{$t("inow")}}  2019-5-11 09:56:45</p>
         </dd>
       </dl>
     </div>

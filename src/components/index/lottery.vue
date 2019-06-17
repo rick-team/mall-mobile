@@ -1,6 +1,6 @@
 <template>
   <div id="lottery">
-    <indexTitle name='开奖' />
+    <indexTitle :name='$t("openAward")' />
     <indexList :itemlist='list' />
   </div>
 </template>
