@@ -1,6 +1,6 @@
 <template>
   <div id="carousel">
-    <swiper :options="swiperOption">
+    <swiper :options="swiperOption" ref="swiperOption" v-if='banner.length>0'>
       <swiper-slide v-for="(items,index) in banner" :key="index">
         <img style='width:100%' :src="items.img" alt="">
       </swiper-slide>

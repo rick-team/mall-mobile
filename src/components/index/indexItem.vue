@@ -74,14 +74,18 @@
   padding: 0.23rem 0 0;
 }
 .progressBar {
-  background: #259bf7;
-  height: .4rem;
-  width: 100%;
-  padding-left: .85rem;
+  padding-left: .87rem;
+  padding-right: .05rem;
   box-sizing: border-box;
   position: absolute;
   z-index: 9;
   bottom: 0;
+  width: 100%;
+  height: .4rem;
+}
+.progressBar_line {
+  background: #259bf7;
+  height: .4rem;
 }
 .dateTime {
   width: 1.52rem;
@@ -115,14 +119,16 @@
       <img :src='infor.imgSrc' />
     </div>
     <div class='scheduleContainer'>
-      <div class='progressBar' :style="{width: infor.schedule + '%'}"></div>
+      <div class='progressBar'>
+        <div class='progressBar_line' :style="{width: infor.schedule + '%'}"></div>
+      </div>
       <div class='surface clearfix'>
         <div class='people'>
           <span>{{$t('participant')}}</span><br>
           <span>{{infor.people}}</span>
         </div>
         <div class='schedule'>
-          {{$t('lotterySchedule')}}{{infor.schedule}}
+          {{$t('lotterySchedule')}}{{infor.schedule}}%
         </div>
       </div>
     </div>

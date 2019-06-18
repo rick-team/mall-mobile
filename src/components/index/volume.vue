@@ -20,7 +20,7 @@ export default {
         content:'看漫画专用',
         money:'126.000',
         people:'20800',
-        schedule:'95.67',
+        schedule:'99.99',
         dateTime:'00:05:55'
       },{
         period:'32',
@@ -28,7 +28,7 @@ export default {
         content:'看电影专用',
         money:'1996.000',
         people:'500',
-        schedule:'50',
+        schedule:'1',
         dateTime:'05:05:55'
       },{
         period:'2',

@@ -25,7 +25,7 @@
 
 <template>
   <div id="win">
-    <swiper class="winlist" :options="swiperOption" ref="winlist">
+    <swiper class="winlist" :options="swiperOption" ref="swiperOption" v-if='msgList.length>0'>
       <swiper-slide  v-for="(item,index) in msgList" :key="index" >
         <div class='slide'>
           <p>{{item}}</p>
