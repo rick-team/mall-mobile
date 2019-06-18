@@ -114,6 +114,7 @@
 }
 .listContainer .list li.onBg {
 	background: url(../assets/bg_ticket_1.jpg);
+	background-size: 100% 100%;
 }
 .listContainer .list li.onBg .right{
 	line-height: 1;
