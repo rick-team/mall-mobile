@@ -1,0 +1,159 @@
+<template>
+  <div class="detail">
+    <indexHeader :banner = banner />
+
+    <div class="detail-info">
+      <div class="detail-price">
+        <span>Rp</span>
+        6.899.539
+      </div>
+      <div class="detail-description">
+        整个雅加达地区我最帅摩托整车包邮附送3个头盔4个轮胎8个刹车3个灯泡外带全车5000保险
+      </div>
+      <div class="detail-parms">
+        <p>■ 延用出口摩托车车架</p>
+        <p>■ 卓越的整车防水性能</p>
+        <p>■ 1200W大功率电机</p>
+        <p>■ EMC防电磁干扰</p>
+        <p>■ AT Field</p>
+      </div>
+    </div>
+
+    <div class="detail-open-wrap">
+      <div class="detail-open-wrap__title">
+        <div>
+          {{$t("no")}}<span>3</span>{{$t("phase")}}
+          <p>{{$t("ongoing")}}</p>
+          <!-- <p>{{$t("inTheLottery")}}</p>
+          <p>{{$t("hasTheLottery")}}</p> -->
+        </div>
+      </div>
+
+      <div class="detail-open-button">
+        <div class="next"></div>
+        <div class="prev"></div>
+      </div>
+
+      <div class="detail-check-wrap__plan">
+        <div class="detail-check-wrap__title">
+          <p>{{$t("openAwardMsg")}}</p>
+        </div>
+        <div class="detail-check-wrap__code">
+          <p>{{$t("changeCode")}}</p>
+          <span>JDK385772</span>
+          <div>{{$t("tapCopy")}}</div>
+        </div>
+      </div>
+
+      <div class="detail-end-wrap__plan" style="display:none;">
+        <div class="user-name">
+          <div class="cover"></div>
+          <div class="name">XDE***F EEF </div>
+        </div>
+        <ul class="user-info">
+          <li>
+            <label>{{$t("time")}}:</label>
+            <span>2019-5-26 20:23:45</span>
+          </li>
+          <li>
+            <label>{{$t("involved")}}:</label>
+            <span>3次</span>
+          </li>
+          <li>
+            <label>{{$t("luckyCode")}}:</label>
+            <span class="code">102562256</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="detail-open-wrap__plan" style="display:none;">
+        <div class="detail-open-wrap__progress">
+          <i style="width: 50%"></i>
+        </div>
+        <ul class="detail-open-wrap__parms">
+          <li>
+            <span>523</span>
+            <p>{{$t("alreadyNum")}}</p>
+          </li>
+          <li>
+            <span>1000</span>
+            <p>{{$t("expectNum")}}</p>
+          </li>
+          <li>
+            <span>477</span>
+            <p>{{$t("remainingNum")}}</p>
+          </li>
+        </ul>
+        <p class="detail-open-wrap__tips">
+          {{$t("activityTips")}}
+          <!-- {{$t("openActivityTips")}} -->
+          <!-- 本次活动目标已达成 <br>
+          激动人心的时刻就要到来啦! -->
+        </p>
+        
+        <div class="detail-open-wrap__handle">
+          <div class="detail-open-wrap__button_minus"></div>
+          <input type="number" value="1">
+          <div class="detail-open-wrap__button_plus"></div>
+          <button class="detail-open-wrap-submit">{{$t("submit")}}</button>
+        </div>
+        <div class="detail-open-timeout">
+          {{$t("timeEnd")}} <i></i> <span>01：05：55</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-expect">
+      <div class="detail-expect-head">
+        {{$t("youParticipate")}} <span>0</span> {{$t("theActivity")}} 
+      </div>
+      <div class="detail-expect-body">
+        <div class="detail-expect-time">
+          <span>{{$t("involvedTime")}}</span>
+          <p>2019-5-11 09:56:45</p>
+          <p>2019-5-11 09:56:45</p>
+        </div>
+        <div class="detail-expect-code">
+          <span>{{$t("luckyCode")}}</span>
+          <p>102689566</p>
+          <p>102689566</p>
+        </div>
+      </div> 
+    </div>
+
+    <div class="detail-open-list">
+      <div class="detail-open-list-title">{{$t("record")}}</div>
+      <dl v-for="item in 8">
+        <dt></dt>
+        <dd>
+          <div class="name">
+            XDEKKDE DEFEF EEF 
+          </div>
+          <p>{{$t("inInvolved")}} <span>2</span> {{$t("inow")}}  2019-5-11 09:56:45</p>
+        </dd>
+      </dl>
+    </div>
+  </div>
+</template>
+
+<script>
+import indexHeader from '@/components/carousel'
+
+export default {
+  components: {
+    indexHeader,
+  },
+  data(){
+    return {
+      banner: [
+        {
+          img: require('@/assets/prize_detail_1.jpg')
+        },
+        {
+          img: require('@/assets/prize_detail_1.jpg')
+        },
+      ]
+    }
+  }
+}
+</script>
