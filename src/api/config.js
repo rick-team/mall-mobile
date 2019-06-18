@@ -11,14 +11,14 @@ const server = axios.create({
 })
 
 // // 请求拦截 如果有token存在则给请求头添加token
-// server.interceptors.request.use(config => {
-//   if (store.state.token) {
-//     config.headers.token = store.state.token
-//   }
-//   return config
-// }, error => {
-//   return Promise.reject(error)
-// })
+server.interceptors.request.use(config => {
+  if (store.state.token) {
+    config.headers.Authorization = 'Bearer ' + store.state.token
+  }
+  return config
+}, error => {
+  return Promise.reject(error)
+})
 
 // // 响应拦截器 返回data内容
 server.interceptors.response.use(({data}) => {
