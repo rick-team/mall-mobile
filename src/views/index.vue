@@ -62,6 +62,7 @@
   padding-left: .6rem;
   box-sizing: border-box;
   color: #000;
+  height: 1.17rem;
 }
 .qa_click {
   position: absolute;
@@ -134,18 +135,27 @@ export default {
     this.$store.dispatch('getCarousel', {
       lang: this.$store.state.lang
     }).then((res) => {
+<<<<<<< HEAD
       // this.bannerphoto = data
+=======
+      console.log(res)
+      this.bannerphoto = res.carouselList
+>>>>>>> 8809fc0845608afde03988966eb85a983d1cc94e
     })
 
-    // this.$store.dispatch('getActivityDetail').then(({data}) => {
+    // this.$store.dispatch('getActivityDetail',{
+    //   lang: this.$store.state.lang
+    // }).then(({data}) => {
     //   console.log(data)
     // })
 
-    // this.$store.dispatch('getUserInfo').then(({data}) => {
-    //   this.diamond = data.diamond
-    //   this.userInfo = data.userInfo
-    //   console.log(data)
-    // })
+    this.$store.dispatch('getUserInfo',{
+      token: this.$store.state.token
+    }).then((data) => {
+      console.log(data)
+      // this.diamond = data.diamond
+      this.userInfo = data.userInfo
+    })
 
   },
   methods: {

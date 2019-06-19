@@ -26,7 +26,7 @@ function getRequest(url) {
 }
 
 const locationBar = getRequest(location.search)
-const CHINA = '3'
+const CHINA = '1'
 const lang = parseInt(locationBar.lang || CHINA)
 let locale = null
 switch (lang) {
@@ -54,6 +54,7 @@ new Vue({
   created() {
     locationBar.token && this.$store.commit('saveToken', locationBar.token)
     this.$store.commit('saveLang', lang)
+    console.log()
   },
   render: h => h(App)
 }).$mount('#app')

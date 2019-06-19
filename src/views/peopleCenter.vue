@@ -19,6 +19,8 @@
 .top .img {
 	margin-right: .1rem;
 	height: 100%;
+	height: .85rem;
+  width: .85rem;
 }
 .top .img img {
 	height: 100%;
@@ -46,6 +48,7 @@
   font-size: .26rem;
   padding-left: .5rem;
   box-sizing: border-box;
+  height: .48rem;
   color: #fff;
 }
 .a_ {
@@ -297,9 +300,9 @@ body.modal-open {
 					</div>
 					<div class='list_lucky list' v-if='!listShow'>
 						<ul>
-							<li class='onBg' v-for="item in luckList" :key='item.ActivityDto.actId'>
+							<li class='onBg' v-for="item in luckList" :key='item.activityDto.actId'>
 								<div class='left'>
-									<p>{{$t("no")}}{{item.ActivityDto.actId}}{{$t("phase")}} {{item.ActivityDto.prizeDto}}</p>
+									<p>{{$t("no")}}{{item.activityDto.actId}}{{$t("phase")}} {{item.activityDto.prizeDto}}</p>
 									<p><span class=time>{{item.joinTime}}</span><span class='btn'>{{$t("luckBtnText")}}</span></p>
 								</div>
 								<div class='right'><p>{{$t("luckCode")}}</p><span>{{item.exchangeCode}}</span></div>
@@ -308,12 +311,12 @@ body.modal-open {
 					</div>
 					<div class='list_all list' v-if='listShow'>
 						<ul>
-							<li v-for='item in allList' :key='item.ActivityDto.actId' :class="[item.exchangeCode==''?item.ActivityDto.actStatus==1?'':item.ActivityDto.actStatus==2?'lottery':'hasLottery' : 'onBg']">
+							<li v-for='item in allList' :key='item.activityDto.actId' :class="[item.exchangeCode==null?item.activityDto.actStatus==1?'':item.activityDto.actStatus==2?'lottery':'hasLottery' : 'onBg']">
 								<div class='left'>
-									<p>{{$t("no")}}{{item.ActivityDto.actId}}{{$t("phase")}} {{item.ActivityDto.prizeDto}}</p>
-									<p><span class=time>{{'2019-5-11 09:56:45'}}</span><span v-if='!item.exchangeCode'><span v-if='item.ActivityDto.actStatus==1' class='btn'>进行中</span><span class='btn' v-if='item.ActivityDto.actStatus==2'>开奖中</span><span class='btn' v-if='item.ActivityDto.actStatus==3'>已开奖</span></span><span class='btn' v-else>中奖</span></p>
+									<p>{{$t("no")}}{{item.activityDto.actNum}}{{$t("phase")}} {{item.activityDto.actName}}</p>
+									<p><span class=time>{{item.activityDto.endTime}}</span><span v-if='item.exchangeCode == null'><span v-if='item.activityDto.actStatus==1' class='btn'>进行中</span><span class='btn' v-if='item.activityDto.actStatus==2'>开奖中</span><span class='btn' v-if='item.activityDto.actStatus==3'>已开奖</span></span><span class='btn' v-else>中奖</span></p>
 								</div>
-								<div class='right' v-if='!item.exchangeCode'>{{$t("inInvolved")}}{{item.joinCount}}{{$t("inow")}}</div>
+								<div class='right' v-if='item.exchangeCode == null'>{{$t("inInvolved")}}{{item.joinCount}}{{$t("inow")}}</div>
                 <div class='right' v-else><p>{{$t("luckCode")}}</p><span>{{item.exchangeCode}}</span></div>
 							</li>
 						</ul>
@@ -350,7 +353,7 @@ export default {
     return {
 			list: 3,
 			rechargeShow:false,
-      listShow:false,
+      listShow:true,
       diamond: {},
       userInfo: {},
       luckList:[],
@@ -373,29 +376,34 @@ export default {
   computed: {
     bgHeight() {
       let length = !this.listShow? this.luckList.length : this.allList.length;
-      let str = (length * 92 + 600) / 100 +'rem';
+      let str = (length * 92 + 300) / 100 +'rem';
       console.log(length);
       console.log(str);
       return str
-    },
-    listClass(luck,code) {
-      return luck==''?code==1?'':code==2?'lottery':'hasLottery' : 'onBg';
     }
   },
   created () {
-    this.$store.dispatch('getUserInfo').then(({data}) => {
-      this.diamond = data.diamond
+    this.$store.dispatch('getUserInfo',{
+	    token: this.$store.state.token
+	  }).then((data) => {
       this.userInfo = data.userInfo
+      //this.diamond = data.userBalance
       console.log(data)
     })
 
-    this.$store.dispatch('getMyJoinRecord').then(({data}) => {
-      this.allList = data;
+    this.$store.dispatch('getMyJoinRecord',{
+      token: this.$store.state.token,
+      page: 1
+	  }).then((data) => {
+      this.allList = data.joinRecordList;
       console.log(data);
     })
 
-    this.$store.dispatch('getMyAwardRecord').then(({data}) => {
-      this.luckList = data;
+    this.$store.dispatch('getMyAwardRecord',{
+	    token: this.$store.state.token,
+      page: 1
+	  }).then((data) => {
+      this.luckList = data.joinRecordList;
       console.log(data)
     })
   }
