@@ -207,8 +207,6 @@ export default {
       }
     },
     goDetail(){
-      console.log(this.infor.actId)
-      console.log(this.infor.actNum)
       this.$router.push({
         path:'/detail', 
         query:{
