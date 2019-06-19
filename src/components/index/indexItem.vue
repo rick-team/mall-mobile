@@ -113,10 +113,10 @@
 <template>
   <div id="indexItem">
     <div class='period'>
-      {{$t("no")}}<span> {{infor.period}} </span>{{$t("phase")}}
+      {{$t("no")}}<span> {{infor.actNum}} </span>{{$t("phase")}}
     </div>
     <div class='goodsImg'>
-      <img :src='infor.imgSrc' />
+      <img :src='infor.thumb.url' />
     </div>
     <div class='scheduleContainer'>
       <div class='progressBar'>
@@ -148,7 +148,10 @@ export default {
 
     }
   },
-  props:['infor']
+  props:['infor'],
+  created() {
+    console.log(this.infor);
+  }
 }
 </script>
 

@@ -135,7 +135,6 @@ export default {
     this.$store.dispatch('getCarousel', {
       lang: this.$store.state.lang
     }).then((res) => {
-      console.log(res)
       this.bannerphoto = res.carouselList
     })
 
@@ -148,8 +147,6 @@ export default {
     this.$store.dispatch('getUserInfo',{
       token: this.$store.state.token
     }).then((data) => {
-      console.log(data)
-      // this.diamond = data.diamond
       this.userInfo = data.userInfo
     })
 
