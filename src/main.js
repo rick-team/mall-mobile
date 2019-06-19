@@ -47,6 +47,11 @@ const i18n = new VueI18n({
   }
 })
 
+Vue.filter('time', function (time) {
+  var date = new Date(time + 8 * 3600 * 1000); // 增加8小时
+  return date.toJSON().substr(0, 19).replace('T', ' ');
+})
+
 new Vue({
   router,
   store,
@@ -54,7 +59,6 @@ new Vue({
   created() {
     locationBar.token && this.$store.commit('saveToken', locationBar.token)
     this.$store.commit('saveLang', lang)
-    console.log()
   },
   render: h => h(App)
 }).$mount('#app')
