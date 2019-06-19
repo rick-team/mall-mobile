@@ -1,6 +1,6 @@
 
 <style scoped>
-#indexItem {
+.indexItem {
   position: relative;
   width: 3.28rem;
   height: 4.27rem;
@@ -111,44 +111,97 @@
 </style>
 
 <template>
-  <div id="indexItem">
+  <div class="indexItem" @click="goDetail">
     <div class='period'>
-      {{$t("no")}}<span> {{infor.period}} </span>{{$t("phase")}}
+      {{$t("no")}}<span> {{infor.actNum}} </span>{{$t("phase")}}
     </div>
     <div class='goodsImg'>
-      <img :src='infor.imgSrc' />
+      <img :src='infor.thumb.url' />
     </div>
     <div class='scheduleContainer'>
       <div class='progressBar'>
-        <div class='progressBar_line' :style="{width: infor.schedule + '%'}"></div>
+        <div class='progressBar_line' :style="{width: schedule + '%'}"></div>
       </div>
       <div class='surface clearfix'>
         <div class='people'>
           <span>{{$t('participant')}}</span><br>
-          <span>{{infor.people}}</span>
+          <span>{{infor.joinCount}}</span>
         </div>
         <div class='schedule'>
-          {{$t('lotterySchedule')}}{{infor.schedule}}%
+          {{$t('lotterySchedule')}}{{ schedule }}%
         </div>
       </div>
     </div>
     <div class='dateTime'>
       <div class='dateTimeIocnBg'>
-        <span>{{infor.dateTime}}</span>
+        <span>{{time}}</span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { clearInterval } from 'timers';
 export default {
   name: 'indexItem',
-  data() {
+  props:['infor'],
+  data(){
     return {
-
+      time: '00:00:00'
     }
   },
-  props:['infor']
+  computed:{
+    schedule(){
+      return this.infor.joinCount / (this.infor.joinCount + this.infor.endCount)
+    }
+  },
+  mounted(){
+    function checkTime(i){
+        if (i <= 10) {
+            i = "0" + i;
+        }
+        return i;
+    }
+    let startTime = Math.round(new Date() / 1000);//开始时间
+    let endTime= this.infor.endTime; //结束时间
+
+    this.timeid = setInterval(() => {
+        let ts = endTime - startTime;//计算剩余的毫秒数
+        let hh = parseInt(ts / 60 / 60 % 24, 10);//计算剩余的小时数
+        let mm = parseInt(ts / 60 % 60, 10);//计算剩余的分钟数
+        let ss = parseInt(ts % 60, 10);//计算剩余的秒数
+        hh = checkTime(hh);
+        mm = checkTime(mm);
+        ss = checkTime(ss);
+        
+        if(ts>0){
+          this.time = hh + ":" + mm + ":" + ss
+          startTime ++;
+        }else if(ts < 0){
+          this.endTime()
+          this.time = '00:00:00'
+        }
+    },1000);
+  },
+  methods:{
+    endTime(){
+      clearInterval(this.timeid)
+      this.timeid = null
+    },
+    goDetail(){
+      console.log(this.infor.actId)
+      console.log(this.infor.actNum)
+      this.$router.push({
+        path:'/detail', 
+        query:{
+          actId: this.infor.actId,
+          actNum: this.infor.actNum
+      }})
+    }
+  },
+  destroyed(){
+    this.endTime()
+  }
 }
 </script>
 

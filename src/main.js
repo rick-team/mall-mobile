@@ -31,13 +31,13 @@ const lang = parseInt(locationBar.lang || CHINA)
 let locale = null
 switch (lang) {
   case 1:
-    locale = 'in'
+    locale = 'zh'
     break;
   case 2:
     locale = 'ma'
     break;
   case 3:
-    locale = 'zh'
+    locale = 'in'
     break;
 }
 const i18n = new VueI18n({
