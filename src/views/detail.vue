@@ -98,7 +98,7 @@
           <button class="detail-open-wrap-submit">{{$t("submit")}}</button>
         </div>
         <div class="detail-open-timeout">
-          {{$t("timeEnd")}} <i></i> <span>01：05：55</span>
+          {{$t("timeEnd")}} <i></i> <span>{{time}}</span>
         </div>
       </div>
     </div>
@@ -148,7 +148,8 @@ export default {
       banner: [],
       prize: {},
       activity: {},
-      activityDetail: {}
+      activityDetail: {},
+      time: '00:00:00'
     }
   },
   created(){
@@ -160,8 +161,42 @@ export default {
       this.prize = activityDetail.activity.prize
       this.activity = activityDetail.activity
       this.banner = activityDetail.detailImg
+      this.timeOut(activityDetail.activity.endTime)
       console.log(activityDetail)
     })
+  },
+  methods: {
+    endTime(){
+      clearInterval(this.timeid)
+      this.timeid = null
+    },
+    timeOut(endTime){
+      function checkTime(i){
+          if (i <= 10) {
+              i = "0" + i;
+          }
+          return i;
+      }
+      let startTime = Math.round(new Date() / 1000);//开始时间
+      
+      this.timeid = setInterval(() => {
+          let ts = endTime - startTime;//计算剩余的毫秒数
+          let hh = parseInt(ts / 60 / 60 % 24, 10);//计算剩余的小时数
+          let mm = parseInt(ts / 60 % 60, 10);//计算剩余的分钟数
+          let ss = parseInt(ts % 60, 10);//计算剩余的秒数
+          hh = checkTime(hh);
+          mm = checkTime(mm);
+          ss = checkTime(ss);
+          
+          if(ts>0){
+            this.time = hh + ":" + mm + ":" + ss
+            startTime ++;
+          }else if(ts < 0){
+            this.endTime()
+            this.time = '00:00:00'
+          }
+      },1000);
+    }
   }
 }
 </script>
