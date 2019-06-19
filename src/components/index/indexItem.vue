@@ -128,7 +128,7 @@
     </div>
     <div class='scheduleContainer'>
       <div class='progressBar'>
-        <div class='progressBar_line' :class='[infor.actStatus == 3?"onLucking":infor.actStatus == 4?"onLucked":""]' :style="{width: schedule + '%'}"></div>
+        <div class='progressBar_line' :class='[infor.actStatus == 3?"onLucking":infor.actStatus == 4?"onLucked":""]' :style="{width: 100 + '%'}"></div>
       </div>
       <div class='surface clearfix'>
         <div class='people'>
@@ -199,8 +199,12 @@ export default {
   },
   methods:{
     endTime(){
-      clearInterval(this.timeid)
-      this.timeid = null
+      try {
+        clearInterval(this.timeid)
+        this.timeid = null
+      }catch(e) {
+        console.log(e);
+      }
     },
     goDetail(){
       console.log(this.infor.actId)

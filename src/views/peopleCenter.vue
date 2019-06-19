@@ -303,7 +303,7 @@ body.modal-open {
 							<li class='onBg' @click="goDetail(item.activityDto.actId,item.activityDto.actNum)" v-for="item in luckList" :key='item.activityDto.actId'>
 								<div class='left'>
 									<p>{{$t("no")}}{{item.activityDto.actId}}{{$t("phase")}} {{item.activityDto.prizeDto}}</p>
-									<p><span class=time>{{item.joinTime}}</span><span class='btn'>{{$t("luckBtnText")}}</span></p>
+									<p><span class=time>{{item.activityDto.endTime | time}}</span><span class='btn'>{{$t("luckBtnText")}}</span></p>
 								</div>
 								<div class='right'><p>{{$t("luckCode")}}</p><span>{{item.exchangeCode}}</span></div>
 							</li>
@@ -314,7 +314,7 @@ body.modal-open {
 							<li @click="goDetail(item.activityDto.actId,item.activityDto.actNum)" v-for='item in allList' :key='item.activityDto.actId' :class="[item.exchangeCode==null?item.activityDto.actStatus==1?'':item.activityDto.actStatus==2?'lottery':'hasLottery' : 'onBg']">
 								<div class='left'>
 									<p>{{$t("no")}}{{item.activityDto.actNum}}{{$t("phase")}} {{item.activityDto.actName}}</p>
-									<p><span class=time>{{item.activityDto.endTime}}</span><span v-if='item.exchangeCode == null'><span v-if='item.activityDto.actStatus==1' class='btn'>进行中</span><span class='btn' v-if='item.activityDto.actStatus==2'>开奖中</span><span class='btn' v-else>已开奖</span></span><span class='btn' v-else>中奖</span></p>
+									<p><span class=time>{{item.activityDto.endTime | time}}</span><span v-if='item.exchangeCode == null'><span v-if='item.activityDto.actStatus==1' class='btn'>进行中</span><span class='btn' v-if='item.activityDto.actStatus==2'>开奖中</span><span class='btn' v-else>已开奖</span></span><span class='btn' v-else>中奖</span></p>
 								</div>
 								<div class='right' v-if='item.exchangeCode == null'>{{$t("inInvolved")}}{{item.joinCount}}{{$t("inow")}}</div>
                 <div class='right' v-else><p>{{$t("luckCode")}}</p><span>{{item.exchangeCode}}</span></div>
