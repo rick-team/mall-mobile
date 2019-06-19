@@ -126,7 +126,7 @@ export default {
   data() {
       return {
         qaShowBl: false,
-        diamond: {},
+        userBalance: {},
         userInfo: {},
         bannerphoto: []
       }
@@ -149,7 +149,7 @@ export default {
       token: this.$store.state.token
     }).then((data) => {
       console.log(data)
-      // this.diamond = data.diamond
+      this.diamond = data.userBalance
       this.userInfo = data.userInfo
     })
 
