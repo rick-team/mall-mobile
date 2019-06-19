@@ -8,24 +8,20 @@
         6.899.539
       </div>
       <div class="detail-description">
-        整个雅加达地区我最帅摩托整车包邮附送3个头盔4个轮胎8个刹车3个灯泡外带全车5000保险
+        {{data.activity.prize.name}}
       </div>
       <div class="detail-parms">
-        <p>■ 延用出口摩托车车架</p>
-        <p>■ 卓越的整车防水性能</p>
-        <p>■ 1200W大功率电机</p>
-        <p>■ EMC防电磁干扰</p>
-        <p>■ AT Field</p>
+        <p>{{data.activity.prize.detail}}</p>
       </div>
     </div>
 
     <div class="detail-open-wrap">
       <div class="detail-open-wrap__title">
         <div>
-          {{$t("no")}}<span>3</span>{{$t("phase")}}
-          <p>{{$t("ongoing")}}</p>
-          <!-- <p>{{$t("inTheLottery")}}</p>
-          <p>{{$t("hasTheLottery")}}</p> -->
+          {{$t("no")}}<span>{{data.activity.actNum}}</span>{{$t("phase")}}
+          <p v-if="data.activity.actStatus == 1">{{$t("ongoing")}}</p>
+          <p v-if="data.activity.actStatus == 2">{{$t("inTheLottery")}}</p>
+          <p v-if="data.activity.actStatus == 3">{{$t("hasTheLottery")}}</p>
         </div>
       </div>
 
@@ -34,7 +30,7 @@
         <div class="prev"></div>
       </div>
 
-      <div class="detail-check-wrap__plan">
+      <div class="detail-check-wrap__plan" v-if="data.activity.actStatus == 4">
         <div class="detail-check-wrap__title">
           <p>{{$t("openAwardMsg")}}</p>
         </div>
@@ -45,7 +41,7 @@
         </div>
       </div>
 
-      <div class="detail-end-wrap__plan" style="display:none;">
+      <div class="detail-end-wrap__plan" v-if="data.activity.actStatus == 3">
         <div class="user-name">
           <div class="cover"></div>
           <div class="name">XDE***F EEF </div>
@@ -66,7 +62,7 @@
         </ul>
       </div>
 
-      <div class="detail-open-wrap__plan" style="display:none;">
+      <div class="detail-open-wrap__plan" v-if="data.activity.actStatus == 2">
         <div class="detail-open-wrap__progress">
           <i style="width: 50%"></i>
         </div>
@@ -85,7 +81,7 @@
           </li>
         </ul>
         <p class="detail-open-wrap__tips">
-          {{$t("activityTips")}}
+          {{$t("activityTipsBefore")}} {{1}} {{$t("activityTipsAfter")}}
           <!-- {{$t("openActivityTips")}} -->
           <!-- 本次活动目标已达成 <br>
           激动人心的时刻就要到来啦! -->
@@ -145,15 +141,19 @@ export default {
   },
   data(){
     return {
-      banner: [
-        {
-          img: require('@/assets/prize_detail_1.jpg')
-        },
-        {
-          img: require('@/assets/prize_detail_1.jpg')
-        },
-      ]
+      banner: [],
+      data: {}
     }
+  },
+  created(){
+    console.log(this.$route)
+    this.$store.dispatch('getActivityDetail',{
+      ...this.$route.query
+    }).then(({activityDetail}) => {
+      this.data = activityDetail
+      this.banner = activityDetail.detailImg
+      console.log(activityDetail)
+    })
   }
 }
 </script>

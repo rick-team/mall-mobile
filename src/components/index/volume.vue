@@ -21,12 +21,13 @@ export default {
     indexTitle,
     indexList
   },
-  beforeCreate() {
-    this.$store.dispatch('getActivityList',{
-      lang:1,
+  created(){
+    this.$store.dispatch('getActivityList', {
+      lang: this.$store.state.lang,
       actType: 1
-    }).then((data) => {
-      this.list = data.activityList;
+    }).then(res => {
+      this.list = res.activityList
+      console.log(res)
     })
   }
 }

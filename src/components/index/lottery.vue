@@ -27,6 +27,7 @@ export default {
       actType: 3
     }).then((data) => {
       this.list = data.activityList;
+      console.log(data);
     })
   }
 }
