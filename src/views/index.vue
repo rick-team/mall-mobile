@@ -135,12 +135,8 @@ export default {
     this.$store.dispatch('getCarousel', {
       lang: this.$store.state.lang
     }).then((res) => {
-<<<<<<< HEAD
-      // this.bannerphoto = data
-=======
       console.log(res)
       this.bannerphoto = res.carouselList
->>>>>>> 8809fc0845608afde03988966eb85a983d1cc94e
     })
 
     // this.$store.dispatch('getActivityDetail',{

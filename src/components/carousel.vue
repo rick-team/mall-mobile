@@ -2,11 +2,7 @@
   <div id="carousel">
     <swiper :options="swiperOption" ref="swiperOption" v-if='banner.length>0'>
       <swiper-slide v-for="(items,index) in banner" :key="index">
-<<<<<<< HEAD
-        <img style='width:100%' :src="items.img || items.url" alt="">
-=======
-        <img style='width:100%' :src="items.img.url" alt="">
->>>>>>> 8809fc0845608afde03988966eb85a983d1cc94e
+        <img style='width:100%' :src="items.url || items.img.url " alt="">
       </swiper-slide>
        <div class="swiper-pagination" id="pagination" slot="pagination"></div>
     </swiper>
