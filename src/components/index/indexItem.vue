@@ -203,7 +203,7 @@ export default {
         clearInterval(this.timeid)
         this.timeid = null
       }catch(e) {
-        console.log(e);
+        // console.log(e);
       }
     },
     goDetail(){
