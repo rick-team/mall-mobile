@@ -8,7 +8,7 @@ Vue.config.productionTip = false
 import '@/style/style.less'
 import 'swiper/dist/css/swiper.css'
 
-import '@/mock'
+// import '@/mock'
 
 
 Vue.use(VueI18n)

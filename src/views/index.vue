@@ -133,19 +133,20 @@ export default {
   mounted(){
     this.$store.dispatch('getCarousel', {
       lang: this.$store.state.lang
-    }).then(({data}) => {
-      this.bannerphoto = data
+    }).then((res) => {
+      console.log(res)
+      // this.bannerphoto = data
     })
 
-    this.$store.dispatch('getActivityDetail').then(({data}) => {
-      console.log(data)
-    })
+    // this.$store.dispatch('getActivityDetail').then(({data}) => {
+    //   console.log(data)
+    // })
 
-    this.$store.dispatch('getUserInfo').then(({data}) => {
-      this.diamond = data.diamond
-      this.userInfo = data.userInfo
-      console.log(data)
-    })
+    // this.$store.dispatch('getUserInfo').then(({data}) => {
+    //   this.diamond = data.diamond
+    //   this.userInfo = data.userInfo
+    //   console.log(data)
+    // })
 
   },
   methods: {
