@@ -147,7 +147,7 @@ export default {
     this.$store.dispatch('getUserInfo',{
       token: this.$store.state.token
     }).then((data) => {
-      this.diamond = data.userBalance
+      this.diamond = data.userBalance?data.userBalance:this.diamond;
       this.userInfo = data.userInfo
     })
 
