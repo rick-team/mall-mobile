@@ -73,6 +73,13 @@
   color: #fff;
   padding: 0.23rem 0 0;
 }
+.progressBar_line.onLucked {
+  background: #fb26d8;
+}
+.progressBar_line.onLucking {
+ background: #fb8426;
+  
+}
 .progressBar {
   padding-left: .87rem;
   padding-right: .05rem;
@@ -108,6 +115,7 @@
   height: .22rem;
   font-size: .19rem;
 }
+
 </style>
 
 <template>
@@ -120,14 +128,20 @@
     </div>
     <div class='scheduleContainer'>
       <div class='progressBar'>
-        <div class='progressBar_line' :style="{width: schedule + '%'}"></div>
+        <div class='progressBar_line' :class='[infor.actStatus == 3?"onLucking":infor.actStatus == 4?"onLucked":""]' :style="{width: schedule + '%'}"></div>
       </div>
       <div class='surface clearfix'>
         <div class='people'>
           <span>{{$t('participant')}}</span><br>
           <span>{{infor.joinCount}}</span>
         </div>
-        <div class='schedule'>
+        <div class='schedule onLucking' v-if='infor.actStatus == 3'>
+          {{$t('lotteryonLucking')}}
+        </div>
+        <div class='schedule onLucked' v-else-if='infor.actStatus == 4'>
+          {{$t('lotteryonLucked')}}
+        </div>
+        <div class='schedule' v-if='infor.actStatus == 2'>
           {{$t('lotterySchedule')}}{{ schedule }}%
         </div>
       </div>

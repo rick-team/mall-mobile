@@ -88,8 +88,8 @@ body.modal-open {
     <indexHeader :banner='bannerphoto' />
     <winningMsg class='luckMsg' />
     <volume />
-    <!-- <diamond />
-    <lottery /> -->
+    <diamond />
+    <lottery />
     <contact color='#fff' />
     <qa v-if='qaShowBl' />
     <div class='bottom_nav'>
@@ -126,7 +126,7 @@ export default {
   data() {
       return {
         qaShowBl: false,
-        userBalance: {},
+        diamond: {},
         userInfo: {},
         bannerphoto: []
       }
@@ -135,7 +135,6 @@ export default {
     this.$store.dispatch('getCarousel', {
       lang: this.$store.state.lang
     }).then((res) => {
-      console.log(res)
       this.bannerphoto = res.carouselList
     })
 
@@ -148,7 +147,6 @@ export default {
     this.$store.dispatch('getUserInfo',{
       token: this.$store.state.token
     }).then((data) => {
-      console.log(data)
       this.diamond = data.userBalance
       this.userInfo = data.userInfo
     })

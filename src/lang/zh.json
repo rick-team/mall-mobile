@@ -40,5 +40,7 @@
   "serviceTips": "*礼品兑换码可以从多种渠道获得，详情请咨询客服",
   "exchange": "兑换",
   "luckCode":"奖品兑换码",
-  "luckBtnText": "中奖"
+  "luckBtnText": "中奖",
+  "lotteryonLucked": "已开奖",
+  "lotteryonLucking": "开奖中"
 }

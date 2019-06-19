@@ -27,7 +27,7 @@ export default {
       actType: 1
     }).then(res => {
       this.list = res.activityList
-      // console.log(res)
+      console.log(res)
     })
   }
 }
