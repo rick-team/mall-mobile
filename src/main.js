@@ -26,18 +26,18 @@ function getRequest(url) {
 }
 
 const locationBar = getRequest(location.search)
-const CHINA = '3'
+const CHINA = '1'
 const lang = parseInt(locationBar.lang || CHINA)
 let locale = null
 switch (lang) {
   case 1:
-    locale = 'in'
+    locale = 'zh'
     break;
   case 2:
     locale = 'ma'
     break;
   case 3:
-    locale = 'zh'
+    locale = 'in'
     break;
 }
 const i18n = new VueI18n({
@@ -54,6 +54,7 @@ new Vue({
   created() {
     locationBar.token && this.$store.commit('saveToken', locationBar.token)
     this.$store.commit('saveLang', lang)
+    console.log()
   },
   render: h => h(App)
 }).$mount('#app')
