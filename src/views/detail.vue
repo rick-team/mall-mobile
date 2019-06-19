@@ -5,23 +5,23 @@
     <div class="detail-info">
       <div class="detail-price">
         <span>Rp</span>
-        6.899.539
+        {{prize.price}}
       </div>
       <div class="detail-description">
-        {{data.activity.prize.name}}
+        {{prize.name}}
       </div>
       <div class="detail-parms">
-        <p>{{data.activity.prize.detail}}</p>
+        <p>{{prize.detail}}</p>
       </div>
     </div>
 
     <div class="detail-open-wrap">
       <div class="detail-open-wrap__title">
         <div>
-          {{$t("no")}}<span>{{data.activity.actNum}}</span>{{$t("phase")}}
-          <p v-if="data.activity.actStatus == 1">{{$t("ongoing")}}</p>
-          <p v-if="data.activity.actStatus == 2">{{$t("inTheLottery")}}</p>
-          <p v-if="data.activity.actStatus == 3">{{$t("hasTheLottery")}}</p>
+          {{$t("no")}}<span>{{activity.actNum}}</span>{{$t("phase")}}
+          <p v-if="activity.actStatus == 1">{{$t("ongoing")}}</p>
+          <p v-if="activity.actStatus == 2">{{$t("inTheLottery")}}</p>
+          <p v-if="activity.actStatus == 3">{{$t("hasTheLottery")}}</p>
         </div>
       </div>
 
@@ -30,7 +30,7 @@
         <div class="prev"></div>
       </div>
 
-      <div class="detail-check-wrap__plan" v-if="data.activity.actStatus == 4">
+      <div class="detail-check-wrap__plan" v-if="activity.actStatus == 4">
         <div class="detail-check-wrap__title">
           <p>{{$t("openAwardMsg")}}</p>
         </div>
@@ -41,7 +41,7 @@
         </div>
       </div>
 
-      <div class="detail-end-wrap__plan" v-if="data.activity.actStatus == 3">
+      <div class="detail-end-wrap__plan" v-if="activity.actStatus == 3">
         <div class="user-name">
           <div class="cover"></div>
           <div class="name">XDE***F EEF </div>
@@ -62,7 +62,7 @@
         </ul>
       </div>
 
-      <div class="detail-open-wrap__plan" v-if="data.activity.actStatus == 2">
+      <div class="detail-open-wrap__plan" v-if="activity.actStatus == 2">
         <div class="detail-open-wrap__progress">
           <i style="width: 50%"></i>
         </div>
@@ -81,13 +81,17 @@
           </li>
         </ul>
         <p class="detail-open-wrap__tips">
-          {{$t("activityTipsBefore")}} {{1}} {{$t("activityTipsAfter")}}
+          <!-- {{$t("activityTipsBefore")}} {{1}} {{$t("activityTipsAfter")}} -->
           <!-- {{$t("openActivityTips")}} -->
           <!-- 本次活动目标已达成 <br>
           激动人心的时刻就要到来啦! -->
         </p>
+        <p class="detail-open-wrap__tips"  v-if="activity.actStatus == 2">
+          {{$t("openActivitySuccess")}} <br/>
+          {{$t("openActivityTips")}}
+        </p>
         
-        <div class="detail-open-wrap__handle">
+        <div class="detail-open-wrap__handle" v-if="activity.actStatus == 1">
           <div class="detail-open-wrap__button_minus"></div>
           <input type="number" value="1">
           <div class="detail-open-wrap__button_plus"></div>
@@ -101,9 +105,9 @@
 
     <div class="detail-expect">
       <div class="detail-expect-head">
-        {{$t("youParticipate")}} <span>0</span> {{$t("theActivity")}} 
+        {{$t("youParticipate")}} <span>{{ activityDetail.myJoinRecord || '0' }}</span> {{$t("theActivity")}} 
       </div>
-      <div class="detail-expect-body">
+      <div class="detail-expect-body" v-if="activityDetail.myJoinRecord">
         <div class="detail-expect-time">
           <span>{{$t("involvedTime")}}</span>
           <p>2019-5-11 09:56:45</p>
@@ -119,13 +123,13 @@
 
     <div class="detail-open-list">
       <div class="detail-open-list-title">{{$t("record")}}</div>
-      <dl v-for="item in 8">
+      <dl v-for="(item, i) in activityDetail.joinRecord" :key='i'>
         <dt></dt>
         <dd>
           <div class="name">
-            XDEKKDE DEFEF EEF 
+            {{item.userInfo.nickName}}
           </div>
-          <p>{{$t("inInvolved")}} <span>2</span> {{$t("inow")}}  2019-5-11 09:56:45</p>
+          <p>{{$t("inInvolved")}} <span>{{item.joinCount}}</span> {{$t("inow")}} {{item.joinTime|time}}</p>
         </dd>
       </dl>
     </div>
@@ -142,7 +146,9 @@ export default {
   data(){
     return {
       banner: [],
-      data: {}
+      prize: {},
+      activity: {},
+      activityDetail: {}
     }
   },
   created(){
@@ -150,7 +156,9 @@ export default {
     this.$store.dispatch('getActivityDetail',{
       ...this.$route.query
     }).then(({activityDetail}) => {
-      this.data = activityDetail
+      this.activityDetail = activityDetail
+      this.prize = activityDetail.activity.prize
+      this.activity = activityDetail.activity
       this.banner = activityDetail.detailImg
       console.log(activityDetail)
     })
