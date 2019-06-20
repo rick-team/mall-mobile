@@ -21,15 +21,10 @@
   "alreadyNum": "已参与次数",
   "expectNum": "目标次数",
   "remainingNum": "剩余次数",
-<<<<<<< HEAD
-  "activityTips": "本活动每次消耗10钻石,可多次参加",
-  "openActivityTips": "本次活动目标已达成 激动人心的时刻就要到来啦",
-=======
   "activityTipsBefore": "本活动每次消耗",
   "activityTipsAfter": "钻石,可多次参加",
   "openActivityTips": "激动人心的时刻就要到来啦",
   "openActivitySuccess": "本次活动目标已达成",
->>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
   "submit": "立即参加",
   "timeEnd": "距离结束剩余",
   "youParticipate": "您已参与了",
@@ -43,9 +38,6 @@
   "topUpType": "请选择充值方式：",
   "inputCode": "你还可以输入兑奖码",
   "serviceTips": "*礼品兑换码可以从多种渠道获得，详情请咨询客服",
-<<<<<<< HEAD
-  "exchange": "兑换"
-=======
   "exchange": "兑换",
   "luckCode":"奖品兑换码",
   "luckBtnText": "中奖",
@@ -68,5 +60,4 @@
   "qa_a_5_1": "你可以使用GooglePay购买钻石,也可以去我们的lazada官方店购买兑换码兑换.充值兑换码也可以在各种活动中免费获得,请时刻关注我们的社交媒体账号或联系客服;",
   "qa_a_6_1": "请适当增加每期活动的参与次数,这可以增加中奖的机会;",
   "qa_a_6_2": "每天保持好心情,好运自然来!"
->>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
 }

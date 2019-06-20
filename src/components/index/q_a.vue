@@ -7,22 +7,15 @@
   left: 0;
   z-index: 101;
   width: 100%;
-<<<<<<< HEAD
-=======
   height: 100vh;
   overflow: auto;
->>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
 }
 .qa_bg {
   position: absolute;
   top: 1.51rem;
   width: 100%;
   background: #d5d5d5;
-<<<<<<< HEAD
-  height: 11rem;
-=======
   height: 14.5rem;
->>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
   z-index: 0;
   min-height: calc(100vh - 1.51rem);
 }
@@ -85,45 +78,25 @@
         <ul>
           <li>
             <div class='q'>
-<<<<<<< HEAD
-              怎么充值?
-            </div>
-            <div class='a'>
-              <p>你可以使用Gpay充值,也可以去lazada官方raymanga店购买兑换码,也可以通过app内各种活动和联系客服获得礼品兑换</p>
-=======
               {{$t('qa_q_1')}}
             </div>
             <div class='a'>
               <p>{{$t('qa_a_1_1')}}</p>
               <p>{{$t('qa_a_1_2')}}</p>
               <p>{{$t('qa_a_1_3')}}</p>
->>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
             </div>
           </li>
           <li>
             <div class='q'>
-<<<<<<< HEAD
-              夺宝活动流程是怎么样的?
-            </div>
-            <div class='a'>
-              <p>1.参加活动;<br /> 2.等待活动开奖;<br /> 3.公布中奖号码;<br /> 4.如果你中奖了,您将在参与记录里看到奖品兑换码,请联系客服,也可以去lazada官方raymanga店购买兑换码,也可以通过app内各种活动和联系客服获得礼品兑换</p>
-=======
               {{$t('qa_q_2')}}
             </div>
             <div class='a'>
               <p>{{$t('qa_a_2_1')}}</p>
               <p>{{$t('qa_a_2_2')}}</p>
->>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
             </div>
           </li>
           <li>
             <div class='q'>
-<<<<<<< HEAD
-              每个活动要多久才能开奖?
-            </div>
-            <div class='a'>
-              <p>参与次数达到目标次数时,或者活动到达结束时间时,就会自动进入开奖状态.敬请关注活动动态,祝您好运</p>
-=======
               {{$t('qa_q_3')}}
             </div>
             <div class='a'>
@@ -154,7 +127,6 @@
             <div class='a'>
               <p>{{$t('qa_a_6_1')}}</p>
               <p>{{$t('qa_a_6_2')}}</p>
->>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
             </div>
           </li>
         </ul>

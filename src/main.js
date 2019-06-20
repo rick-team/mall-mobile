@@ -8,11 +8,7 @@ Vue.config.productionTip = false
 import '@/style/style.less'
 import 'swiper/dist/css/swiper.css'
 
-<<<<<<< HEAD
-import '@/mock'
-=======
 // import '@/mock'
->>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
 
 
 Vue.use(VueI18n)
@@ -51,14 +47,11 @@ const i18n = new VueI18n({
   }
 })
 
-<<<<<<< HEAD
-=======
 Vue.filter('time', function (time) {
   var date = new Date(time + 8 * 3600 * 1000); // 增加8小时
   return date.toJSON().substr(0, 19).replace('T', ' ');
 })
 
->>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
 new Vue({
   router,
   store,
@@ -68,8 +61,4 @@ new Vue({
     this.$store.commit('saveLang', lang)
   },
   render: h => h(App)
-<<<<<<< HEAD
 }).$mount('#app')
-=======
-}).$mount('#app')
->>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7

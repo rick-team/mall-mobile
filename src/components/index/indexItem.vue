@@ -1,10 +1,6 @@
 
 <style scoped>
-<<<<<<< HEAD
-#indexItem {
-=======
 .indexItem {
->>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
   position: relative;
   width: 3.28rem;
   height: 4.27rem;
@@ -77,13 +73,6 @@
   color: #fff;
   padding: 0.23rem 0 0;
 }
-<<<<<<< HEAD
-.progressBar {
-  background: #259bf7;
-  height: .4rem;
-  width: 100%;
-  padding-left: .85rem;
-=======
 .progressBar_line.onLucked {
   background: #fb26d8;
 }
@@ -94,31 +83,23 @@
 .progressBar {
   padding-left: .87rem;
   padding-right: .05rem;
->>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
   box-sizing: border-box;
   position: absolute;
   z-index: 9;
   bottom: 0;
-<<<<<<< HEAD
-=======
   width: 100%;
   height: .4rem;
 }
 .progressBar_line {
   background: #259bf7;
   height: .4rem;
->>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
 }
 .dateTime {
   width: 1.52rem;
   margin: .1rem auto 0;
   background: rgba(255, 255, 255, .1);
   color: #fff;
-<<<<<<< HEAD
-  font-family: 'é»‘ä½“';
-=======
   font-family: '???';
->>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
   box-sizing: border-box;
 }
 .dateTimeIocnBg {
@@ -134,33 +115,6 @@
   height: .22rem;
   font-size: .19rem;
 }
-<<<<<<< HEAD
-</style>
-
-<template>
-  <div id="indexItem">
-    <div class='period'>
-      {{$t("no")}}<span> {{infor.period}} </span>{{$t("phase")}}
-    </div>
-    <div class='goodsImg'>
-      <img :src='infor.imgSrc' />
-    </div>
-    <div class='scheduleContainer'>
-      <div class='progressBar' :style="{width: infor.schedule + '%'}"></div>
-      <div class='surface clearfix'>
-        <div class='people'>
-          <span>{{$t('participant')}}</span><br>
-          <span>{{infor.people}}</span>
-        </div>
-        <div class='schedule'>
-          {{$t('lotterySchedule')}}{{infor.schedule}}
-        </div>
-      </div>
-    </div>
-    <div class='dateTime'>
-      <div class='dateTimeIocnBg'>
-        <span>{{infor.dateTime}}</span>
-=======
 
 </style>
 
@@ -195,23 +149,12 @@
     <div class='dateTime' v-if='infor.actStatus != 4'>
       <div class='dateTimeIocnBg'>
         <span>{{time}}</span>
->>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
       </div>
     </div>
   </div>
 </template>
 
 <script>
-<<<<<<< HEAD
-export default {
-  name: 'indexItem',
-  data() {
-    return {
-
-    }
-  },
-  props:['infor']
-=======
 import { clearInterval } from 'timers';
 export default {
   name: 'indexItem',
@@ -233,14 +176,14 @@ export default {
         }
         return i;
     }
-    let startTime = Math.round(new Date() / 1000);//?€????
+    let startTime = Math.round(new Date() / 1000);//?ï¿½????ï¿½
     let endTime= this.infor.endTime; //??????
 
     this.timeid = setInterval(() => {
         let ts = endTime - startTime;//????????????
         let hh = parseInt(ts / 60 / 60 % 24, 10);//????????????
         let mm = parseInt(ts / 60 % 60, 10);//????????????
-        let ss = parseInt(ts % 60, 10);//??????????
+        let ss = parseInt(ts % 60, 10);//??????????ï¿½
         hh = checkTime(hh);
         mm = checkTime(mm);
         ss = checkTime(ss);
@@ -275,7 +218,6 @@ export default {
   destroyed(){
     this.endTime()
   }
->>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
 }
 </script>
 

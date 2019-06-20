@@ -27,10 +27,7 @@
   width: .85rem;
   display: inline-block;
   vertical-align: middle;
-<<<<<<< HEAD
-=======
   border-radius: 50%;
->>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
 }
 .bottom_nav .use {
   padding-top: .2rem;
@@ -65,10 +62,7 @@
   padding-left: .6rem;
   box-sizing: border-box;
   color: #000;
-<<<<<<< HEAD
-=======
   height: 1.17rem;
->>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
 }
 .qa_click {
   position: absolute;
@@ -140,20 +134,6 @@ export default {
   mounted(){
     this.$store.dispatch('getCarousel', {
       lang: this.$store.state.lang
-<<<<<<< HEAD
-    }).then(({data}) => {
-      this.bannerphoto = data
-    })
-
-    this.$store.dispatch('getActivityDetail').then(({data}) => {
-      console.log(data)
-    })
-
-    this.$store.dispatch('getUserInfo').then(({data}) => {
-      this.diamond = data.diamond
-      this.userInfo = data.userInfo
-      console.log(data)
-=======
     }).then((res) => {
       this.bannerphoto = res.carouselList
     })
@@ -169,7 +149,6 @@ export default {
     }).then((data) => {
       this.diamond = data.userBalance?data.userBalance:this.diamond;
       this.userInfo = data.userInfo
->>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
     })
 
   },

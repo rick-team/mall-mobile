@@ -14,17 +14,12 @@ export default {
 </script>
 
 <style socped>
-<<<<<<< HEAD
-.title {
-    width: 2.41rem;
-=======
 #indexTitle {
   text-align: center;
 }
 .title {
     display: inline-block;
     min-width: 2.41rem;
->>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
     height: .7rem;
     background: #472093;
     border: .05rem solid #864cba;
@@ -37,11 +32,7 @@ export default {
     font-weight: bold;
     margin: 0 auto .15rem;
     border-radius: .34rem;
-<<<<<<< HEAD
-    padding: 0.05rem 0.15rem;
-=======
     padding: 0.05rem 0.3rem;
->>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
     box-sizing: border-box; 
 }
 .title span {
