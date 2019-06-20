@@ -99,7 +99,7 @@
   margin: .1rem auto 0;
   background: rgba(255, 255, 255, .1);
   color: #fff;
-  font-family: '黑体';
+  font-family: '???';
   box-sizing: border-box;
 }
 .dateTimeIocnBg {
@@ -128,7 +128,7 @@
     </div>
     <div class='scheduleContainer'>
       <div class='progressBar'>
-        <div class='progressBar_line' :class='[infor.actStatus == 3?"onLucking":infor.actStatus == 4?"onLucked":""]' :style="{width: 100 + '%'}"></div>
+        <div class='progressBar_line' :class='[infor.actStatus == 3?"onLucking":infor.actStatus == 4?"onLucked":""]' :style="{width: schedule + '%'}"></div>
       </div>
       <div class='surface clearfix'>
         <div class='people'>
@@ -146,7 +146,7 @@
         </div>
       </div>
     </div>
-    <div class='dateTime'>
+    <div class='dateTime' v-if='infor.actStatus != 4'>
       <div class='dateTimeIocnBg'>
         <span>{{time}}</span>
       </div>
@@ -176,14 +176,14 @@ export default {
         }
         return i;
     }
-    let startTime = Math.round(new Date() / 1000);//开始时间
-    let endTime= this.infor.endTime; //结束时间
+    let startTime = Math.round(new Date() / 1000);//?�????�
+    let endTime= this.infor.endTime; //??????
 
     this.timeid = setInterval(() => {
-        let ts = endTime - startTime;//计算剩余的毫秒数
-        let hh = parseInt(ts / 60 / 60 % 24, 10);//计算剩余的小时数
-        let mm = parseInt(ts / 60 % 60, 10);//计算剩余的分钟数
-        let ss = parseInt(ts % 60, 10);//计算剩余的秒数
+        let ts = endTime - startTime;//????????????
+        let hh = parseInt(ts / 60 / 60 % 24, 10);//????????????
+        let mm = parseInt(ts / 60 % 60, 10);//????????????
+        let ss = parseInt(ts % 60, 10);//??????????�
         hh = checkTime(hh);
         mm = checkTime(mm);
         ss = checkTime(ss);
