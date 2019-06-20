@@ -14,8 +14,12 @@ export default {
 </script>
 
 <style socped>
+#indexTitle {
+  text-align: center;
+}
 .title {
-    width: 2.41rem;
+    display: inline-block;
+    min-width: 2.41rem;
     height: .7rem;
     background: #472093;
     border: .05rem solid #864cba;
@@ -28,7 +32,7 @@ export default {
     font-weight: bold;
     margin: 0 auto .15rem;
     border-radius: .34rem;
-    padding: 0.05rem 0.15rem;
+    padding: 0.05rem 0.3rem;
     box-sizing: border-box; 
 }
 .title span {

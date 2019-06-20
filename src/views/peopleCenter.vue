@@ -98,7 +98,6 @@
 .listContainer .nav p.on span:after{
 	content: '';
 	display: block;
-	width: 1.5rem;
 	height: .05rem;
 	background: #6822a6;
 	position: absolute;
@@ -408,7 +407,7 @@ export default {
 	    token: this.$store.state.token
 	  }).then((data) => {
       this.userInfo = data.userInfo
-      //this.diamond = data.userBalance
+      this.diamond = data.userBalance
       console.log(data)
     })
 

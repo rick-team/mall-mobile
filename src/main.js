@@ -26,24 +26,25 @@ function getRequest(url) {
 }
 
 const locationBar = getRequest(location.search)
-const CHINA = '1'
+const CHINA = '3'
 const lang = parseInt(locationBar.lang || CHINA)
 let locale = null
 switch (lang) {
   case 1:
-    locale = 'zh'
+    locale = 'in'
     break;
   case 2:
     locale = 'ma'
     break;
   case 3:
-    locale = 'in'
+    locale = 'zh'
     break;
 }
 const i18n = new VueI18n({
   locale: locale,
   messages: {
     'zh': require('@/lang/zh.json'),
+    'in': require('@/lang/in.json'),
   }
 })
 
