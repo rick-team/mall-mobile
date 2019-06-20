@@ -57,10 +57,10 @@
   color: #fff;
   float: left;
 }
-.surface .people span:first-child {
+.surface .people span:last-child {
   font-size: .10rem;
 }
-.surface .people span:last-child {
+.surface .people span:first-child {
   font-size: .30rem;
   font-weight: bold;
 }
@@ -121,7 +121,7 @@
 <template>
   <div class="indexItem" @click="goDetail">
     <div class='period'>
-      {{$t("no")}}<span> {{infor.actNum}} </span>{{$t("phase")}}
+      {{$t("no")}} <span> {{infor.actNum}} </span> {{$t("phase")}}
     </div>
     <div class='goodsImg'>
       <img :src='infor.thumb.url' />
@@ -132,8 +132,8 @@
       </div>
       <div class='surface clearfix'>
         <div class='people'>
-          <span>{{$t('participant')}}</span><br>
-          <span>{{infor.joinCount}}</span>
+          <span v-if='infor.actStatus!=2'>{{100}}</span><span v-else>{{infor.joinCount}}</span><br>
+          <span>{{$t('participant')}}</span>
         </div>
         <div class='schedule onLucking' v-if='infor.actStatus == 3'>
           {{$t('lotteryonLucking')}}
@@ -176,14 +176,14 @@ export default {
         }
         return i;
     }
-    let startTime = Math.round(new Date() / 1000);//?Ä????ù
+    let startTime = Math.round(new Date() / 1000);//?ÔøΩ????ÔøΩ
     let endTime= this.infor.endTime; //??????
 
     this.timeid = setInterval(() => {
         let ts = endTime - startTime;//????????????
         let hh = parseInt(ts / 60 / 60 % 24, 10);//????????????
         let mm = parseInt(ts / 60 % 60, 10);//????????????
-        let ss = parseInt(ts % 60, 10);//??????????ù
+        let ss = parseInt(ts % 60, 10);//??????????ÔøΩ
         hh = checkTime(hh);
         mm = checkTime(mm);
         ss = checkTime(ss);

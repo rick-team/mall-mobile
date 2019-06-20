@@ -66,6 +66,7 @@
   z-index: 11;
   width: 95%;
   top: 2rem;
+  padding-bottom: .2rem;
 }
 .listContainer .box {
   padding-top: .34rem;
@@ -124,17 +125,17 @@
   box-sizing: border-box;
 }
 .listContainer .list li.onBg .right p {
+  font-size: .16rem;
   margin-bottom: .05rem;
 }
 .listContainer .list li.onBg .right span{
-  font-size: .36rem;
+  font-size: .30rem;
   color: #ff0d0d;
 }
 
 .listContainer .list li.onBg .left p:last-child .btn {
   background-color: #ff0d0d;
   color: #fff;
-  letter-spacing: .1rem;
 }
 .listContainer .list li.lottery .left p:last-child .btn {
   background-color: #fc3f86
@@ -158,7 +159,6 @@
 	margin-right: .1rem;
 	vertical-align: middle;
 }
-
 .listContainer .list li .left p:last-child .btn {
 	height: .22rem;
 	width: 1.3rem;
@@ -171,7 +171,6 @@
 	vertical-align: middle;
 	box-sizing: border-box;
 	vertical-align: middle;
-  padding: 0.03rem 0.15rem 0.03rem .2rem;
 }
 .listContainer .list li .right {
 	width: 2.2rem;
@@ -268,6 +267,11 @@ body.modal-open {
   position: fixed;
   width: 100%;
 }
+#copy {
+  position: absolute;
+  z-index: -999;
+  bottom: 0;
+}
 </style>
 <template>
   <div id="peopleCenter">
@@ -299,10 +303,10 @@ body.modal-open {
 					</div>
 					<div class='list_lucky list' v-if='!listShow'>
 						<ul>
-							<li class='onBg' @click="goDetail(item.activityDto.actId,item.activityDto.actNum)" v-for="item in luckList" :key='item.exchangeCode'>
+							<li class='onBg' @click="goDetail(item.activityDto.actId,item.activityDto.actNum)" v-for="item in luckList" :key='item.activityDto.actId'>
 								<div class='left'>
-									<p>{{$t("no")}}{{item.activityDto.actId}}{{$t("phase")}} {{item.activityDto.prizeDto}}</p>
-									<p><span class=time>{{item.activityDto.endTime | time}}</span><span class='btn' @click='getLuckCode(item.exchangeCode)'>{{$t("luckBtnText")}}</span></p>
+									<p>{{$t("no")}}&ensp;{{item.activityDto.actId}}&ensp;{{$t("phase")}} {{item.activityDto.prizeDto}}</p>
+									<p><span class=time>{{item.activityDto.endTime | time}}</span><span class='btn' @click.stop='getLuckCode(item.exchangeCode)'>{{$t("luckBtnText")}}</span></p>
 								</div>
 								<div class='right'><p>{{$t("luckCode")}}</p><span>{{item.exchangeCode}}</span></div>
 							</li>
@@ -312,8 +316,8 @@ body.modal-open {
 						<ul>
 							<li @click="goDetail(item.activityDto.actId,item.activityDto.actNum)" v-for='item in allList' :key='item.activityDto.actId' :class="[item.exchangeCode==null?item.activityDto.actStatus==1?'':item.activityDto.actStatus==2?'lottery':'hasLottery' : 'onBg']">
 								<div class='left'>
-									<p>{{$t("no")}}{{item.activityDto.actNum}}{{$t("phase")}} {{item.activityDto.actName}}</p>
-									<p><span class=time>{{item.activityDto.endTime | time}}</span><span v-if='item.exchangeCode == null'><span v-if='item.activityDto.actStatus==1' class='btn'>进行中</span><span class='btn' v-if='item.activityDto.actStatus==2'>开奖中</span><span class='btn' v-else>已开奖</span></span><span class='btn' v-else>中奖</span></p>
+									<p>{{$t("no")}}&ensp;{{item.activityDto.actNum}}&ensp;{{$t("phase")}} {{item.activityDto.actName}}</p>
+									<p><span class=time>{{item.activityDto.endTime | time}}</span><span v-if='item.exchangeCode == null'><span v-if='item.activityDto.actStatus==2' class='btn'>{{$t("ongoing")}}</span><span class='btn' v-if='item.activityDto.actStatus==3'>{{$t("inTheLottery")}}</span><span class='btn' v-else>{{$t("hasTheLottery")}}</span></span><span class='btn' @click.stop='getLuckCode(item.exchangeCode)' v-else>{{$t("luckBtnText")}}</span></p>
 								</div>
 								<div class='right' v-if='item.exchangeCode == null'>{{$t("inInvolved")}}{{item.joinCount}}{{$t("inow")}}</div>
                 <div class='right' v-else><p>{{$t("luckCode")}}</p><span>{{item.exchangeCode}}</span></div>
@@ -340,6 +344,7 @@ body.modal-open {
 				</div>
 			</div>
 		</div>
+    <input id='copy' type='text' />
   </div>
 </template>
 
@@ -378,8 +383,8 @@ export default {
         //this.diamond = data.userBalance
         console.log(data)
       })
-	},
-	goDetail(actId,actNum){
+	  },
+	  goDetail(actId,actNum){
       console.log(actId)
       console.log(actNum)
       this.$router.push({
@@ -388,6 +393,13 @@ export default {
           actId: actId,
           actNum: actNum
       }})
+    },
+    getLuckCode(code) {
+      var copycode=document.getElementById("copy");
+      copycode.value = code;
+      copycode.select(); // 选择对象
+      document.execCommand("Copy"); // 执行浏览器复制命令
+      alert("OK。");
     }
   },
   components: {
