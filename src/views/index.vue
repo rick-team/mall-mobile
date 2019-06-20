@@ -94,7 +94,7 @@ body.modal-open {
     <qa v-if='qaShowBl' />
     <div class='bottom_nav'>
       <div class='img left'>
-        <img :src='userInfo.imgUrl' />
+        <img :src='"http://headicon.raymangaapp.com" + userInfo.imgUrl' />
       </div>
       <div class='use left'>
         <p>{{userInfo.nickName}}</p>
@@ -147,7 +147,8 @@ export default {
     this.$store.dispatch('getUserInfo',{
       token: this.$store.state.token
     }).then((data) => {
-      this.diamond = data.userBalance?data.userBalance:this.diamond;
+      console.log(data);
+      this.diamond = data.userBalance;
       this.userInfo = data.userInfo
     })
 

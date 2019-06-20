@@ -277,7 +277,7 @@ body.modal-open {
     <div class='content'>
 			<div class='top'>
 				<div class='img left'>
-					<img :src='userInfo.imgUrl' />
+					<img :src='"http://headicon.raymangaapp.com" + userInfo.imgUrl' />
 				</div>
 				<div class='use'>
 					<div class='name'>{{userInfo.nickName}}</div>
@@ -300,10 +300,10 @@ body.modal-open {
 					</div>
 					<div class='list_lucky list' v-if='!listShow'>
 						<ul>
-							<li class='onBg' @click="goDetail(item.activityDto.actId,item.activityDto.actNum)" v-for="item in luckList" :key='item.activityDto.actId'>
+							<li class='onBg' @click="goDetail(item.activityDto.actId,item.activityDto.actNum)" v-for="item in luckList" :key='item.exchangeCode'>
 								<div class='left'>
 									<p>{{$t("no")}}{{item.activityDto.actId}}{{$t("phase")}} {{item.activityDto.prizeDto}}</p>
-									<p><span class=time>{{item.activityDto.endTime | time}}</span><span class='btn'>{{$t("luckBtnText")}}</span></p>
+									<p><span class=time>{{item.activityDto.endTime | time}}</span><span class='btn' @click='getLuckCode(item.exchangeCode)'>{{$t("luckBtnText")}}</span></p>
 								</div>
 								<div class='right'><p>{{$t("luckCode")}}</p><span>{{item.exchangeCode}}</span></div>
 							</li>
