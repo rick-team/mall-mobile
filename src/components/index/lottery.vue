@@ -14,6 +14,7 @@ export default {
   name: 'lottery',
   data() {
     return {
+<<<<<<< HEAD
       list:[{
         period:'3',
         imgSrc:goodsImg,
@@ -47,11 +48,26 @@ export default {
         schedule:'100',
         dateTime:'00:05:55'
       }]
+=======
+      list:[]
+>>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
     }
   },
   components: {
     indexTitle,
     indexList
+<<<<<<< HEAD
+=======
+  },
+  beforeCreate() {
+    this.$store.dispatch('getActivityList',{
+      lang:1,
+      actType: 3
+    }).then((data) => {
+      this.list = data.activityList;
+      console.log(data);
+    })
+>>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
   }
 }
 </script>

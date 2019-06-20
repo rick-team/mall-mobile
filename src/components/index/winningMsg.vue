@@ -25,10 +25,17 @@
 
 <template>
   <div id="win">
+<<<<<<< HEAD
     <swiper class="winlist" :options="swiperOption" ref="winlist">
       <swiper-slide  v-for="(item,index) in msgList" :key="index" >
         <div class='slide'>
           <p>{{item}}</p>
+=======
+    <swiper class="winlist" :options="swiperOption" ref="swiperOption" v-if='msgList.length>0'>
+      <swiper-slide  v-for="(item,index) in msgList" :key="index" >
+        <div class='slide'>
+          <p>恭喜 用户{{item.nickName}} 获得 {{item.prizeName}} 价值Rp {{item.price}} </p>
+>>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
           <p class='bottom'>注大家好运连连，把把都中</p>
         </div>
       </swiper-slide>
@@ -57,8 +64,13 @@ export default {
   created(){
     this.$store.dispatch('getAwardRecord', {
       lang: this.$store.state.lang
+<<<<<<< HEAD
     }).then(({data}) => {
       this.msgList = data
+=======
+    }).then((data) => {
+      this.msgList = data.awardMsg
+>>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
     })
   },
   components: {

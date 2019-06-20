@@ -1,8 +1,14 @@
 <template>
   <div id="carousel">
+<<<<<<< HEAD
     <swiper :options="swiperOption">
       <swiper-slide v-for="(items,index) in banner" :key="index">
         <img style='width:100%' :src="items.img" alt="">
+=======
+    <swiper :options="swiperOption" ref="swiperOption" v-if='banner.length>0'>
+      <swiper-slide v-for="(items,index) in banner" :key="index">
+        <img style='width:100%' :src="items.url || items.img.url " alt="">
+>>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
       </swiper-slide>
        <div class="swiper-pagination" id="pagination" slot="pagination"></div>
     </swiper>

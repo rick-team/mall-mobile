@@ -1,6 +1,10 @@
 <template>
   <div id="indexList">
+<<<<<<< HEAD
     <indexItem class='item' v-for='item in itemlist' :key='item.money' :infor='item' />
+=======
+    <indexItem class='item' v-for='(item, i) in itemlist' :key='i' :infor='item' />
+>>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
   </div>
 </template>
 

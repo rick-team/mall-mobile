@@ -19,9 +19,18 @@
 .top .img {
 	margin-right: .1rem;
 	height: 100%;
+<<<<<<< HEAD
 }
 .top .img img {
 	height: 100%;
+=======
+	height: .85rem;
+  width: .85rem;
+}
+.top .img img {
+	height: 100%;
+  border-radius: 50%;
+>>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
 }
 .use {
 	text-align: left;
@@ -45,6 +54,10 @@
   font-size: .26rem;
   padding-left: .5rem;
   box-sizing: border-box;
+<<<<<<< HEAD
+=======
+  height: .48rem;
+>>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
   color: #fff;
 }
 .a_ {
@@ -94,7 +107,10 @@
 .listContainer .nav p.on span:after{
 	content: '';
 	display: block;
+<<<<<<< HEAD
 	width: 1.5rem;
+=======
+>>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
 	height: .05rem;
 	background: #6822a6;
 	position: absolute;
@@ -111,6 +127,7 @@
 	background-size: 100% 100%;
 	margin-bottom: .13rem;
 }
+<<<<<<< HEAD
 .listContainer .list li .left{
 		width: 3.9rem;
 		height: .92rem;
@@ -119,6 +136,44 @@
 		text-align: left;
 		box-sizing: border-box;
 		line-height: 1.1;
+=======
+.listContainer .list li.onBg {
+	background: url(../assets/bg_ticket_1.jpg);
+	background-size: 100% 100%;
+}
+.listContainer .list li.onBg .right{
+	line-height: 1;
+  padding: .2rem 0;
+  box-sizing: border-box;
+}
+.listContainer .list li.onBg .right p {
+  margin-bottom: .05rem;
+}
+.listContainer .list li.onBg .right span{
+  font-size: .36rem;
+  color: #ff0d0d;
+}
+
+.listContainer .list li.onBg .left p:last-child .btn {
+  background-color: #ff0d0d;
+  color: #fff;
+  letter-spacing: .1rem;
+}
+.listContainer .list li.lottery .left p:last-child .btn {
+  background-color: #fc3f86
+}
+.listContainer .list li.hasLottery .left p:last-child .btn {
+  background-color: #fc823f
+}
+.listContainer .list li .left{
+  width: 3.9rem;
+  height: .92rem;
+  padding: .14rem .22rem;
+  font-size: .19rem;
+  text-align: left;
+  box-sizing: border-box;
+  line-height: 1.1;
+>>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
 }
 .listContainer .list li .left p:first-child{
 	height: .45rem;
@@ -140,7 +195,11 @@
 	vertical-align: middle;
 	box-sizing: border-box;
 	vertical-align: middle;
+<<<<<<< HEAD
   padding: 0.03rem 0.15rem;
+=======
+  padding: 0.03rem 0.15rem 0.03rem .2rem;
+>>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
 }
 .listContainer .list li .right {
 	width: 2.2rem;
@@ -245,6 +304,7 @@ body.modal-open {
     <div class='content'>
 			<div class='top'>
 				<div class='img left'>
+<<<<<<< HEAD
 					<img src='../assets/usericon_default.png' />
 				</div>
 				<div class='use'>
@@ -255,6 +315,18 @@ body.modal-open {
 						</div>
 						<div class='diamond left'>
 							<p>{{99000}}</p>
+=======
+					<img :src='userInfo.imgUrl' />
+				</div>
+				<div class='use'>
+					<div class='name'>{{userInfo.nickName}}</div>
+					<div>
+						<div class='kupon left'>
+							<p>{{diamond.diamond}}</p>
+						</div>
+						<div class='diamond left'>
+							<p>{{diamond.ticket}}</p>
+>>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
 						</div>
 						<p class='a_ left' @click.stop='rechargeShowFn'>{{$t("topUp")}}</p>
 					</div>
@@ -268,6 +340,7 @@ body.modal-open {
 					</div>
 					<div class='list_lucky list' v-if='!listShow'>
 						<ul>
+<<<<<<< HEAD
 							<li>
 								<div class='left'>
 									<p>{{$t("no")}}3{{$t("phase")}} 整个雅加达北区我最帅摩托 送3个头盔4个轮胎5个刹车</p>
@@ -288,11 +361,20 @@ body.modal-open {
 									<p><span class=time>{{'2019-5-11 09:56:45'}}</span><span class='btn'>进行中</span></p>
 								</div>
 								<div class='right'>参与{{}}次</div>
+=======
+							<li class='onBg' @click="goDetail(item.activityDto.actId,item.activityDto.actNum)" v-for="item in luckList" :key='item.activityDto.actId'>
+								<div class='left'>
+									<p>{{$t("no")}}{{item.activityDto.actId}}{{$t("phase")}} {{item.activityDto.prizeDto}}</p>
+									<p><span class=time>{{item.activityDto.endTime | time}}</span><span class='btn'>{{$t("luckBtnText")}}</span></p>
+								</div>
+								<div class='right'><p>{{$t("luckCode")}}</p><span>{{item.exchangeCode}}</span></div>
+>>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
 							</li>
 						</ul>
 					</div>
 					<div class='list_all list' v-if='listShow'>
 						<ul>
+<<<<<<< HEAD
 							<li>
 								<div class='left'>
 									<p>第3333333期 整个雅加达北区我最帅摩托 送3个头盔4个轮胎5个刹车</p>
@@ -313,6 +395,15 @@ body.modal-open {
 									<p><span class=time>{{'2019-5-11 09:56:45'}}</span><span class='btn'>进行中</span></p>
 								</div>
 								<div class='right'>参与{{}}次</div>
+=======
+							<li @click="goDetail(item.activityDto.actId,item.activityDto.actNum)" v-for='item in allList' :key='item.activityDto.actId' :class="[item.exchangeCode==null?item.activityDto.actStatus==1?'':item.activityDto.actStatus==2?'lottery':'hasLottery' : 'onBg']">
+								<div class='left'>
+									<p>{{$t("no")}}{{item.activityDto.actNum}}{{$t("phase")}} {{item.activityDto.actName}}</p>
+									<p><span class=time>{{item.activityDto.endTime | time}}</span><span v-if='item.exchangeCode == null'><span v-if='item.activityDto.actStatus==1' class='btn'>进行中</span><span class='btn' v-if='item.activityDto.actStatus==2'>开奖中</span><span class='btn' v-else>已开奖</span></span><span class='btn' v-else>中奖</span></p>
+								</div>
+								<div class='right' v-if='item.exchangeCode == null'>{{$t("inInvolved")}}{{item.joinCount}}{{$t("inow")}}</div>
+                <div class='right' v-else><p>{{$t("luckCode")}}</p><span>{{item.exchangeCode}}</span></div>
+>>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
 							</li>
 						</ul>
 					</div>
@@ -329,10 +420,17 @@ body.modal-open {
 					</div>
 					<p class='p_center'>{{$t("inputCode")}}</p>
 					<div class='inputDiv'>
+<<<<<<< HEAD
 						<input type='text' />
 					</div>
 					<p class='p_bottom'>{{$t("serviceTips")}}</p>
 					<div class='btnDiv'>{{$t("exchange")}}</div>
+=======
+						<input type='text' v-model="giftCode" />
+					</div>
+					<p class='p_bottom'>{{$t("serviceTips")}}</p>
+					<div class='btnDiv' @click='exchangeGiftCode'>{{$t("exchange")}}</div>
+>>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
 				</div>
 			</div>
 		</div>
@@ -348,7 +446,16 @@ export default {
     return {
 			list: 3,
 			rechargeShow:false,
+<<<<<<< HEAD
 			listShow:true
+=======
+      listShow:true,
+      giftCode:'',
+      diamond: {},
+      userInfo: {},
+      luckList:[],
+      allList:[]
+>>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
     }
   },
   methods:{
@@ -359,6 +466,7 @@ export default {
     rechargeCloseFn() {
       this.rechargeShow = false;
       document.getElementsByTagName('body')[0].classList.remove("modal-open");
+<<<<<<< HEAD
     }
   },
 	components: {
@@ -369,6 +477,67 @@ export default {
 			return (3 * 92 + 300) / 100 +'rem'
 		}
 	}
+=======
+    },
+    exchangeGiftCode() {
+      this.$store.dispatch('exchangeGiftCode',{
+        token: this.$store.state.token,
+        giftCode: this.giftCode
+      }).then((data) => {
+        //this.userInfo = data.userInfo
+        //this.diamond = data.userBalance
+        console.log(data)
+      })
+	},
+	goDetail(actId,actNum){
+      console.log(actId)
+      console.log(actNum)
+      this.$router.push({
+        path:'/detail', 
+        query:{
+          actId: actId,
+          actNum: actNum
+      }})
+    }
+  },
+  components: {
+    contact,
+  },
+  computed: {
+    bgHeight() {
+      let length = !this.listShow? this.luckList.length : this.allList.length;
+      let str = (length * 92 + 300) / 100 +'rem';
+      console.log(length);
+      console.log(str);
+      return str
+    }
+  },
+  created () {
+    this.$store.dispatch('getUserInfo',{
+	    token: this.$store.state.token
+	  }).then((data) => {
+      this.userInfo = data.userInfo
+      this.diamond = data.userBalance
+      console.log(data)
+    })
+
+    this.$store.dispatch('getMyJoinRecord',{
+      token: this.$store.state.token,
+      page: 1
+	  }).then((data) => {
+      this.allList = data.joinRecordList;
+      console.log(data);
+    })
+
+    this.$store.dispatch('getMyAwardRecord',{
+	    token: this.$store.state.token,
+      page: 1
+	  }).then((data) => {
+      this.luckList = data.joinRecordList;
+      console.log(data)
+    })
+  }
+>>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
 }
 </script>
 

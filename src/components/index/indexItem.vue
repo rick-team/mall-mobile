@@ -1,6 +1,10 @@
 
 <style scoped>
+<<<<<<< HEAD
 #indexItem {
+=======
+.indexItem {
+>>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
   position: relative;
   width: 3.28rem;
   height: 4.27rem;
@@ -73,22 +77,48 @@
   color: #fff;
   padding: 0.23rem 0 0;
 }
+<<<<<<< HEAD
 .progressBar {
   background: #259bf7;
   height: .4rem;
   width: 100%;
   padding-left: .85rem;
+=======
+.progressBar_line.onLucked {
+  background: #fb26d8;
+}
+.progressBar_line.onLucking {
+ background: #fb8426;
+  
+}
+.progressBar {
+  padding-left: .87rem;
+  padding-right: .05rem;
+>>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
   box-sizing: border-box;
   position: absolute;
   z-index: 9;
   bottom: 0;
+<<<<<<< HEAD
+=======
+  width: 100%;
+  height: .4rem;
+}
+.progressBar_line {
+  background: #259bf7;
+  height: .4rem;
+>>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
 }
 .dateTime {
   width: 1.52rem;
   margin: .1rem auto 0;
   background: rgba(255, 255, 255, .1);
   color: #fff;
+<<<<<<< HEAD
   font-family: 'é»‘ä½“';
+=======
+  font-family: '???';
+>>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
   box-sizing: border-box;
 }
 .dateTimeIocnBg {
@@ -104,6 +134,7 @@
   height: .22rem;
   font-size: .19rem;
 }
+<<<<<<< HEAD
 </style>
 
 <template>
@@ -129,12 +160,49 @@
     <div class='dateTime'>
       <div class='dateTimeIocnBg'>
         <span>{{infor.dateTime}}</span>
+=======
+
+</style>
+
+<template>
+  <div class="indexItem" @click="goDetail">
+    <div class='period'>
+      {{$t("no")}}<span> {{infor.actNum}} </span>{{$t("phase")}}
+    </div>
+    <div class='goodsImg'>
+      <img :src='infor.thumb.url' />
+    </div>
+    <div class='scheduleContainer'>
+      <div class='progressBar'>
+        <div class='progressBar_line' :class='[infor.actStatus == 3?"onLucking":infor.actStatus == 4?"onLucked":""]' :style="{width: schedule + '%'}"></div>
+      </div>
+      <div class='surface clearfix'>
+        <div class='people'>
+          <span>{{$t('participant')}}</span><br>
+          <span>{{infor.joinCount}}</span>
+        </div>
+        <div class='schedule onLucking' v-if='infor.actStatus == 3'>
+          {{$t('lotteryonLucking')}}
+        </div>
+        <div class='schedule onLucked' v-else-if='infor.actStatus == 4'>
+          {{$t('lotteryonLucked')}}
+        </div>
+        <div class='schedule' v-if='infor.actStatus == 2'>
+          {{$t('lotterySchedule')}}{{ schedule }}%
+        </div>
+      </div>
+    </div>
+    <div class='dateTime' v-if='infor.actStatus != 4'>
+      <div class='dateTimeIocnBg'>
+        <span>{{time}}</span>
+>>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
       </div>
     </div>
   </div>
 </template>
 
 <script>
+<<<<<<< HEAD
 export default {
   name: 'indexItem',
   data() {
@@ -143,6 +211,71 @@ export default {
     }
   },
   props:['infor']
+=======
+import { clearInterval } from 'timers';
+export default {
+  name: 'indexItem',
+  props:['infor'],
+  data(){
+    return {
+      time: '00:00:00'
+    }
+  },
+  computed:{
+    schedule(){
+      return this.infor.joinCount / (this.infor.joinCount + this.infor.endCount)
+    }
+  },
+  mounted(){
+    function checkTime(i){
+        if (i <= 10) {
+            i = "0" + i;
+        }
+        return i;
+    }
+    let startTime = Math.round(new Date() / 1000);//?€????
+    let endTime= this.infor.endTime; //??????
+
+    this.timeid = setInterval(() => {
+        let ts = endTime - startTime;//????????????
+        let hh = parseInt(ts / 60 / 60 % 24, 10);//????????????
+        let mm = parseInt(ts / 60 % 60, 10);//????????????
+        let ss = parseInt(ts % 60, 10);//??????????
+        hh = checkTime(hh);
+        mm = checkTime(mm);
+        ss = checkTime(ss);
+        
+        if(ts>0){
+          this.time = hh + ":" + mm + ":" + ss
+          startTime ++;
+        }else if(ts < 0){
+          this.endTime()
+          this.time = '00:00:00'
+        }
+    },1000);
+  },
+  methods:{
+    endTime(){
+      try {
+        clearInterval(this.timeid)
+        this.timeid = null
+      }catch(e) {
+        // console.log(e);
+      }
+    },
+    goDetail(){
+      this.$router.push({
+        path:'/detail', 
+        query:{
+          actId: this.infor.actId,
+          actNum: this.infor.actNum
+      }})
+    }
+  },
+  destroyed(){
+    this.endTime()
+  }
+>>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
 }
 </script>
 

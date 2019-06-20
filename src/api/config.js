@@ -1,5 +1,6 @@
 import axios from 'axios'
 import store from '@/store/store'
+<<<<<<< HEAD
 
 // const baseURL = 'http://149.129.84.7/'
 
@@ -11,6 +12,18 @@ const server = axios.create({
 })
 
 // // 请求拦截 如果有token存在则给请求头添加token
+=======
+import baseURL from './baseURL'
+
+const server = axios.create({
+  baseURL: baseURL,
+  headers: {
+    'Content-Type': 'application/json'
+  }
+})
+
+// 请求拦截 如果有token存在则给请求头添加token
+>>>>>>> 6918e2e1284682df76f88cf708ec009bf6b972d7
 server.interceptors.request.use(config => {
   if (store.state.token) {
     config.headers.Authorization = 'Bearer ' + store.state.token
