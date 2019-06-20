@@ -277,6 +277,7 @@ export default {
           }else if(ts < 0){
             this.endTime()
             this.time = '00:00:00'
+            location.reload()
           }
       },1000);
     }
