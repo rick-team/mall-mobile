@@ -166,7 +166,7 @@ export default {
   },
   computed:{
     schedule(){
-      return this.infor.joinCount / (this.infor.joinCount + this.infor.endCount)
+      return (this.infor.joinCount / (this.infor.joinCount + this.infor.endCount)).toFixed(2) * 100;
     }
   },
   mounted(){
