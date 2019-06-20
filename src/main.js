@@ -53,6 +53,31 @@ Vue.filter('time', function (time) {
   return date.toJSON().substr(0, 19).replace('T', ' ');
 })
 
+Vue.filter('fmoney', function (val) {
+  if (val) {
+    let symbol = ''
+    if (val < 0) {
+      symbol = '-'
+      val = Math.abs(val)
+    }
+    let numArr = val.toFixed(2).split('.')
+    let num = numArr[0]
+    let result = ''
+    while (num.length > 3) {
+      result = ',' + num.slice(-3) + result
+      num = num.slice(0, num.length - 3)
+    }
+    if (num) {
+      result = num + result
+    }
+    return symbol + result + '.' + numArr[1]
+  } else {
+    return '-'
+  }
+})
+
+
+
 new Vue({
   router,
   store,

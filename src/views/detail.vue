@@ -1,11 +1,12 @@
 <template>
   <div class="detail">
+    <router-link class="back" to="/">back</router-link>
     <indexHeader :banner = banner />
 
     <div class="detail-info">
       <div class="detail-price">
         <span>Rp</span>
-        {{prize.price}}
+        {{prize.price | fmoney}}
       </div>
       <div class="detail-description">
         {{prize.name}}
@@ -19,24 +20,24 @@
       <div class="detail-open-wrap__title">
         <div>
           {{$t("no")}}<span>{{activity.actNum}}</span>{{$t("phase")}}
-          <p v-if="activity.actStatus == 1">{{$t("ongoing")}}</p>
-          <p v-if="activity.actStatus == 2">{{$t("inTheLottery")}}</p>
-          <p v-if="activity.actStatus == 3">{{$t("hasTheLottery")}}</p>
+          <p v-if="activity.actStatus == 2">{{$t("ongoing")}}</p>
+          <p v-if="activity.actStatus == 3">{{$t("inTheLottery")}}</p>
+          <p v-if="activity.actStatus == 4">{{$t("hasTheLottery")}}</p>
         </div>
       </div>
 
       <div class="detail-open-button">
-        <div class="next"></div>
-        <div class="prev"></div>
+        <div class="next" @click="next"></div>
+        <div class="prev" @click="prev"></div>
       </div>
 
       <div class="detail-check-wrap__plan" v-if="activity.actStatus == 4">
         <div class="detail-check-wrap__title">
           <p>{{$t("openAwardMsg")}}</p>
         </div>
-        <div class="detail-check-wrap__code">
+        <div class="detail-check-wrap__code" @click="getLuckCode(awardRecord.luckyCode)">
           <p>{{$t("changeCode")}}</p>
-          <span>JDK385772</span>
+          <span>{{awardRecord.luckyCode}}</span>
           <div>{{$t("tapCopy")}}</div>
         </div>
       </div>
@@ -64,38 +65,38 @@
 
       <div class="detail-open-wrap__plan" v-if="activity.actStatus == 2">
         <div class="detail-open-wrap__progress">
-          <i style="width: 50%"></i>
+          <i :style="'width: '+progress+'%'"></i>
         </div>
         <ul class="detail-open-wrap__parms">
           <li>
-            <span>523</span>
+            <span>{{ start }}</span>
             <p>{{$t("alreadyNum")}}</p>
           </li>
           <li>
-            <span>1000</span>
+            <span>{{activity.endCount}}</span>
             <p>{{$t("expectNum")}}</p>
           </li>
           <li>
-            <span>477</span>
+            <span>{{ end }}</span>
             <p>{{$t("remainingNum")}}</p>
           </li>
         </ul>
-        <p class="detail-open-wrap__tips">
-          <!-- {{$t("activityTipsBefore")}} {{1}} {{$t("activityTipsAfter")}} -->
+        <p class="detail-open-wrap__tips"  v-if="activity.actStatus == 2">
+          {{$t("activityTipsBefore")}} {{activityDetail.joinPrice}} {{$t("activityTipsAfter")}}
           <!-- {{$t("openActivityTips")}} -->
           <!-- 本次活动目标已达成 <br>
           激动人心的时刻就要到来啦! -->
         </p>
-        <p class="detail-open-wrap__tips"  v-if="activity.actStatus == 2">
+        <p class="detail-open-wrap__tips"  v-if="activity.actStatus == 3">
           {{$t("openActivitySuccess")}} <br/>
           {{$t("openActivityTips")}}
         </p>
         
-        <div class="detail-open-wrap__handle" v-if="activity.actStatus == 1">
-          <div class="detail-open-wrap__button_minus"></div>
-          <input type="number" value="1">
-          <div class="detail-open-wrap__button_plus"></div>
-          <button class="detail-open-wrap-submit">{{$t("submit")}}</button>
+        <div class="detail-open-wrap__handle" v-if="activity.actStatus == 2">
+          <div class="detail-open-wrap__button_minus" @click="minus"></div>
+          <input type="number" :value="joinCount">
+          <div class="detail-open-wrap__button_plus" @click="plus"></div>
+          <button class="detail-open-wrap-submit" @click="submit">{{$t("submit")}}</button>
         </div>
         <div class="detail-open-timeout">
           {{$t("timeEnd")}} <i></i> <span>{{time}}</span>
@@ -133,6 +134,7 @@
         </dd>
       </dl>
     </div>
+    <input id='copy' type='text' style="position:fixed; top: -2000px;"/>
   </div>
 </template>
 
@@ -148,8 +150,21 @@ export default {
       banner: [],
       prize: {},
       activity: {},
+      joinCount: 1,
+      awardRecord: null,
       activityDetail: {},
       time: '00:00:00'
+    }
+  },
+  computed:{
+    start(){
+      return this.activity.joinCount || 0 
+    },
+    end(){
+      return this.activity.endCount - (this.activity.joinCount || 0)
+    },
+    progress(){
+      return this.start / this.activity.endCount * 100
     }
   },
   created(){
@@ -157,18 +172,86 @@ export default {
     this.$store.dispatch('getActivityDetail',{
       ...this.$route.query
     }).then(({activityDetail}) => {
-      this.activityDetail = activityDetail
-      this.prize = activityDetail.activity.prize
-      this.activity = activityDetail.activity
-      this.banner = activityDetail.detailImg
-      this.timeOut(activityDetail.activity.endTime)
       console.log(activityDetail)
+      if(activityDetail){
+        this.activityDetail = activityDetail
+        this.prize = activityDetail.activity.prize
+        this.activity = activityDetail.activity
+        this.banner = activityDetail.detailImg
+        this.timeOut(activityDetail.activity.endTime)
+        this.awardRecord = activityDetail.awardRecord
+      } else {
+        this.prev()
+        console.log(activityDetail)
+      }
+      
     })
   },
   methods: {
+    next(){
+      const actId = this.$route.query.actId
+      let actNum = parseInt(this.$route.query.actNum)
+      console.log(actNum)
+      actNum++
+      // actNum += actNum
+      this.$router.push({
+        path:'/detail', 
+        query:{
+          actId: actId,
+          actNum: actNum
+      }})
+      location.reload()
+    },
+    prev(){
+      const actId = this.$route.query.actId
+      let actNum = parseInt(this.$route.query.actNum)
+      console.log(actNum)
+      actNum--
+      console.log(actNum)
+      if(actNum < 1){
+        alert('没有了')
+        return
+      }
+      // actNum += actNum
+      this.$router.push({
+        path:'/detail', 
+        query:{
+          actId: actId,
+          actNum: actNum
+      }})
+      location.reload()
+    },
+    getLuckCode(code) {
+      var copycode=document.getElementById("copy");
+      copycode.value = code
+      copycode.select(); // 选择对象
+      document.execCommand("Copy"); // 执行浏览器复制命令
+      alert("OK。");
+    },
+    submit(){
+      const actId = this.$route.query.actId
+      const token = this.$store.state.token
+      this.$store.dispatch('joinActivity', {
+        actId: actId,
+        token: token,
+        joinCount: this.joinCount
+      }).then(({code}) => {
+        if(code == 1){
+          alert('submit ok')
+        }
+      })
+    },
     endTime(){
       clearInterval(this.timeid)
       this.timeid = null
+    },
+    minus(){
+      if(this.joinCount > 1){
+        this.joinCount --
+      }
+    },
+    plus(){
+      this.joinCount ++
     },
     timeOut(endTime){
       function checkTime(i){
