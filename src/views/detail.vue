@@ -166,7 +166,13 @@ export default {
     },
     activityTipsAll(){
       let noPhase = this.$t('activityTipsAll').split('{$}')
-      return noPhase[0] + this.activityDetail.joinPrice + noPhase[1]
+      let unit
+      if(this.activity.prize.priceType == 1){
+        unit = this.$t('brick')
+      } else if(his.activity.prize.priceType == 2){
+        unit = this.$t('ticket')
+      }
+      return noPhase[0] + this.activityDetail.joinPrice + unit + noPhase[1]
     },
     actNum(){
       let noPhase = this.$t('noPhase').split('{$}')
