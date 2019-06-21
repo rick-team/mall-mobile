@@ -19,7 +19,8 @@
     <div class="detail-open-wrap">
       <div class="detail-open-wrap__title">
         <div>
-          {{$t("no")}}<span>{{activity.actNum}}</span>{{$t("phase")}}
+          {{actNum}}
+          <!-- {{$t("no")}}<span>{{activity.actNum}}</span>{{$t("phase")}} -->
           <p v-if="activity.actStatus == 2">{{$t("ongoing")}}</p>
           <p v-if="activity.actStatus == 3">{{$t("inTheLottery")}}</p>
           <p v-if="activity.actStatus == 4">{{$t("hasTheLottery")}}</p>
@@ -53,8 +54,8 @@
             <span>{{awardRecord.joinTime | time}}</span>
           </li>
           <li>
-            <label>{{$t("involved")}}:</label>
-            <span>{{awardRecord.joinCount}}次</span>
+            <label>{{$t("inInvolved")}}:</label>
+            <span>{{awardRecord.joinCount}}</span>
           </li>
           <li>
             <label>{{$t("luckyCode")}}:</label>
@@ -82,7 +83,7 @@
           </li>
         </ul>
         <p class="detail-open-wrap__tips"  v-if="activity.actStatus == 2">
-          {{$t("activityTipsBefore")}} {{activityDetail.joinPrice}} {{$t("activityTipsAfter")}}
+          {{activityTipsAll}}
           <!-- {{$t("openActivityTips")}} -->
           <!-- 本次活动目标已达成 <br>
           激动人心的时刻就要到来啦! -->
@@ -105,9 +106,7 @@
     </div>
 
     <div class="detail-expect">
-      <div class="detail-expect-head">
-        {{$t("youParticipate")}} <span>{{ activityDetail.myJoinRecord || '0' }}</span> {{$t("theActivity")}} 
-      </div>
+      <div class="detail-expect-head" v-html="myJoinRecord"></div>
       <div class="detail-expect-body" v-if="activityDetail.myJoinRecord">
         <div class="detail-expect-time">
           <span>{{$t("involvedTime")}}</span>
@@ -159,6 +158,19 @@ export default {
     }
   },
   computed:{
+    myJoinRecord(){
+      let noPhase = this.$t('youParticipate').split('{$}')
+      const myJoinRecord = this.activityDetail.myJoinRecord || 0
+      return noPhase[0] +'<span>'+ myJoinRecord +'</span>'+ noPhase[1]
+    },
+    activityTipsAll(){
+      let noPhase = this.$t('activityTipsAll').split('{$}')
+      return noPhase[0] + this.activityDetail.joinPrice + noPhase[1]
+    },
+    actNum(){
+      let noPhase = this.$t('noPhase').split('{$}')
+      return noPhase[0] + this.activity.actNum + noPhase[1]
+    },
     start(){
       return this.activity.joinCount || 0 
     },
