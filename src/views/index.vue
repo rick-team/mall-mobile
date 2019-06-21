@@ -39,7 +39,7 @@
 .bottom_nav .use .a_ {
   width: 2.4rem;
   height: .48rem;
-  background:#e81354;
+  background:url(../assets/e81354.png);
   border-radius: .24rem;
   line-height: .48rem;
   font-size: .26rem;

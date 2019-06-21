@@ -303,7 +303,7 @@ body.modal-open {
 						<p class='left' @click='listShow=true' :class='{on:listShow}'><span>{{$t("allAward")}}</span></p>
 					</div>
 					<div class='list_lucky list' v-if='!listShow'>
-						<ul v-if='luckList.length!=0'>
+						<ul>
 							<li class='onBg' @click="goDetail(item.activityDto.actId,item.activityDto.actNum)" v-for="(item, i) in luckList" :key='i'>
 								<div class='left'>
 									<p>{{ actNum(item.activityDto.actId) }} {{item.activityDto.actName}}</p>
@@ -314,7 +314,7 @@ body.modal-open {
 						</ul>
 					</div>
 					<div class='list_all list' v-if='listShow'>
-						<ul v-if='luckList.length!=0'>
+						<ul>
 							<li @click="goDetail(item.activityDto.actId,item.activityDto.actNum)" v-for='(item, i) in allList' :key='i' :class="[item.exchangeCode==null?item.activityDto.actStatus==1?'':item.activityDto.actStatus==2?'lottery':'hasLottery' : 'onBg']">
 								<div class='left'>
 									<p>{{ actNum(item.activityDto.actNum) }} {{item.activityDto.actName}}</p>
@@ -435,7 +435,9 @@ export default {
       token: this.$store.state.token,
       page: 1
 	  }).then((data) => {
-      this.allList = data.joinRecordList;
+      if(data.code == 1) {
+        this.allList = data.joinRecordList;
+      }
       console.log(data);
     })
 
@@ -443,7 +445,9 @@ export default {
 	    token: this.$store.state.token,
       page: 1
 	  }).then((data) => {
-      this.luckList = data.joinRecordList;
+      if(data.code == 1) {
+        this.luckList = data.joinRecordList;
+      }
       console.log(data)
     })
   }
