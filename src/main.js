@@ -44,6 +44,7 @@ const i18n = new VueI18n({
   locale: locale,
   messages: {
     'zh': require('@/lang/zh.json'),
+    'in': require('@/lang/in.json'),
   }
 })
 

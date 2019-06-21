@@ -125,6 +125,7 @@
 }
 .listContainer .list li.onBg .right p {
   margin-bottom: .05rem;
+  font-size: .16rem;
 }
 .listContainer .list li.onBg .right span{
   font-size: .36rem;
@@ -134,7 +135,6 @@
 .listContainer .list li.onBg .left p:last-child .btn {
   background-color: #ff0d0d;
   color: #fff;
-  letter-spacing: .1rem;
 }
 .listContainer .list li.lottery .left p:last-child .btn {
   background-color: #fc3f86
@@ -298,7 +298,7 @@ body.modal-open {
 						<p class='left' @click='listShow=true' :class='{on:listShow}'><span>{{$t("allAward")}}</span></p>
 					</div>
 					<div class='list_lucky list' v-if='!listShow'>
-						<ul>
+						<ul v-if='luckList.length!=0'>
 							<li class='onBg' @click="goDetail(item.activityDto.actId,item.activityDto.actNum)" v-for="item in luckList" :key='item.activityDto.actId'>
 								<div class='left'>
 									<p>{{$t("no")}}{{item.activityDto.actId}}{{$t("phase")}} {{item.activityDto.prizeDto}}</p>
@@ -309,11 +309,11 @@ body.modal-open {
 						</ul>
 					</div>
 					<div class='list_all list' v-if='listShow'>
-						<ul>
+						<ul v-if='luckList.length!=0'>
 							<li @click="goDetail(item.activityDto.actId,item.activityDto.actNum)" v-for='item in allList' :key='item.activityDto.actId' :class="[item.exchangeCode==null?item.activityDto.actStatus==1?'':item.activityDto.actStatus==2?'lottery':'hasLottery' : 'onBg']">
 								<div class='left'>
 									<p>{{$t("no")}}{{item.activityDto.actNum}}{{$t("phase")}} {{item.activityDto.actName}}</p>
-									<p><span class=time>{{item.activityDto.endTime | time}}</span><span v-if='item.exchangeCode == null'><span v-if='item.activityDto.actStatus==1' class='btn'>进行中</span><span class='btn' v-if='item.activityDto.actStatus==2'>开奖中</span><span class='btn' v-else>已开奖</span></span><span class='btn' v-else>中奖</span></p>
+									<p><span class=time>{{item.activityDto.endTime | time}}</span><span v-if='item.exchangeCode == null'><span v-if='item.activityDto.actStatus==1' class='btn'>{{$t("ongoing")}}</span><span class='btn' v-if='item.activityDto.actStatus==2'>{{$t("lotteryonLucking")}}</span><span class='btn' v-else>{{$t("lotteryonLucked")}}</span></span><span class='btn' v-else>{{$t("luckBtnText")}}</span></p>
 								</div>
 								<div class='right' v-if='item.exchangeCode == null'>{{$t("inInvolved")}}{{item.joinCount}}{{$t("inow")}}</div>
                 <div class='right' v-else><p>{{$t("luckCode")}}</p><span>{{item.exchangeCode}}</span></div>

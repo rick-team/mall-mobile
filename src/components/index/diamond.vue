@@ -23,7 +23,7 @@ export default {
   },
   beforeCreate() {
     this.$store.dispatch('getActivityList',{
-      lang:1,
+      lang:this.$store.state.lang,
       actType: 2
     }).then((data) => {
       this.list = data.activityList;
