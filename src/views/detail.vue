@@ -322,6 +322,8 @@ export default {
           setTimeout(countTime,1000)
         } else {
           this.activity.actStatus = 3
+          setTimeout(kaijan, 2000)
+
           // if(this.activity.actStatus === 2){
           //   kaijan()
           // }
