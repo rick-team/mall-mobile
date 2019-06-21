@@ -38,5 +38,7 @@
   "serviceTips": "*Kode penukaran hadiah dapat diperoleh dari berbagai saluran, silakan hubungi layanan pelanggan untuk detailnya.",
   "exchange": "tukar",
   "luckCode":"kode penukaran hadiah",
-  "luckBtnText": "menang"
+  "luckBtnText": "menang",
+  "thousand": ".",
+  "minute": ","
 }

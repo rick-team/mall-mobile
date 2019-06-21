@@ -31,39 +31,39 @@
         <div class="prev" @click="prev"></div>
       </div>
 
-      <div class="detail-check-wrap__plan" v-if="activity.actStatus == 4">
+      <div v-if="activity.actStatus == 4">
+      <div class="detail-check-wrap__plan" v-if="awardRecord.exchangeCode">
         <div class="detail-check-wrap__title">
           <p>{{$t("openAwardMsg")}}</p>
         </div>
-        <div class="detail-check-wrap__code" @click="getLuckCode(awardRecord.luckyCode)">
+        <div class="detail-check-wrap__code" @click="getLuckCode(awardRecord.exchangeCode)">
           <p>{{$t("changeCode")}}</p>
-          <span>{{awardRecord.luckyCode}}</span>
+          <span>{{awardRecord.exchangeCode}}</span>
           <div>{{$t("tapCopy")}}</div>
         </div>
       </div>
-
-      <div class="detail-end-wrap__plan" v-if="activity.actStatus == 3">
+      <div class="detail-end-wrap__plan" v-else>
         <div class="user-name">
-          <div class="cover"></div>
-          <div class="name">XDE***F EEF </div>
+          <div class="cover"><img :src="awardRecord.userInfo.imgUrl" alt=""></div>
+          <div class="name">{{awardRecord.userInfo.nickName}} </div>
         </div>
         <ul class="user-info">
           <li>
             <label>{{$t("time")}}:</label>
-            <span>2019-5-26 20:23:45</span>
+            <span>{{awardRecord.joinTime | time}}</span>
           </li>
           <li>
             <label>{{$t("involved")}}:</label>
-            <span>3次</span>
+            <span>{{awardRecord.joinCount}}次</span>
           </li>
           <li>
             <label>{{$t("luckyCode")}}:</label>
-            <span class="code">102562256</span>
+            <span class="code">{{awardRecord.luckyCode}}</span>
           </li>
         </ul>
-      </div>
+      </div></div>
 
-      <div class="detail-open-wrap__plan" v-if="activity.actStatus == 2">
+      <div class="detail-open-wrap__plan" v-if="activity.actStatus == 2 || activity.actStatus == 3">
         <div class="detail-open-wrap__progress">
           <i :style="'width: '+progress+'%'"></i>
         </div>
@@ -125,7 +125,9 @@
     <div class="detail-open-list">
       <div class="detail-open-list-title">{{$t("record")}}</div>
       <dl v-for="(item, i) in activityDetail.joinRecord" :key='i'>
-        <dt></dt>
+        <dt>
+          <img :src="item.userInfo.imgUrl" alt="">
+        </dt>
         <dd>
           <div class="name">
             {{item.userInfo.nickName}}
@@ -168,7 +170,7 @@ export default {
     }
   },
   created(){
-    console.log(this.$route)
+    
     this.$store.dispatch('getActivityDetail',{
       ...this.$route.query
     }).then(({activityDetail}) => {
@@ -184,7 +186,6 @@ export default {
         this.prev()
         console.log(activityDetail)
       }
-      
     })
   },
   methods: {
@@ -254,32 +255,51 @@ export default {
       this.joinCount ++
     },
     timeOut(endTime){
-      function checkTime(i){
-          if (i <= 10) {
-              i = "0" + i;
+
+      const kaijan = () => {
+        this.$store.dispatch('getActivityDetail',{
+          ...this.$route.query
+        }).then(({activityDetail}) => {
+          console.log(activityDetail)
+          if(activityDetail){
+            this.activityDetail = activityDetail
+            this.prize = activityDetail.activity.prize
+            this.activity = activityDetail.activity
+            this.banner = activityDetail.detailImg
+            this.timeOut(activityDetail.activity.endTime)
+            this.awardRecord = activityDetail.awardRecord
+          } else {
+            this.prev()
+            console.log(activityDetail)
           }
-          return i;
+        })
       }
-      let startTime = Math.round(new Date() / 1000);//开始时间
-      
-      this.timeid = setInterval(() => {
-          let ts = endTime - startTime;//计算剩余的毫秒数
-          let hh = parseInt(ts / 60 / 60 % 24, 10);//计算剩余的小时数
-          let mm = parseInt(ts / 60 % 60, 10);//计算剩余的分钟数
-          let ss = parseInt(ts % 60, 10);//计算剩余的秒数
-          hh = checkTime(hh);
-          mm = checkTime(mm);
-          ss = checkTime(ss);
+    
+
+      const countTime = () => {
+      let startTime = new Date().getTime();
+  
+        var leftTime = endTime-startTime
+
+        if (leftTime>=0) {  
+          let h = Math.floor(leftTime/1000/60/60%24);  
+          let m = Math.floor(leftTime/1000/60%60);  
+          let s = Math.floor(leftTime/1000%60);
+            
+          h = h < 10 ? `0${h}` : h
+          m = m < 10 ? `0${m}` : m
+          s = s < 10 ? `0${s}` : s
           
-          if(ts>0){
-            this.time = hh + ":" + mm + ":" + ss
-            startTime ++;
-          }else if(ts < 0){
-            this.endTime()
-            this.time = '00:00:00'
-            location.reload()
+          this.time = `${h}:${m}:${s}`
+          setTimeout(countTime,1000)
+        } else {
+          if(this.activity.actStatus === 2){
+            kaijan()
           }
-      },1000);
+          // location.reload()
+        }
+      }
+      countTime()
     }
   }
 }
