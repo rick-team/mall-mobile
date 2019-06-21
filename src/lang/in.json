@@ -4,7 +4,7 @@
   "lotterySchedule": "Jadwal hadiah",
   "no": "Ke-",
   "phase": "periode",
-  "noPhase": "Ke-&periode",
+  "noPhase": "Ke-{$}periode",
   "area": "bagian",
   "openAward": "mengumumkan hadiah",
   "roll": "kupon",

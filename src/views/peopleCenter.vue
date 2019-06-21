@@ -304,9 +304,9 @@ body.modal-open {
 					</div>
 					<div class='list_lucky list' v-if='!listShow'>
 						<ul v-if='luckList.length!=0'>
-							<li class='onBg' @click="goDetail(item.activityDto.actId,item.activityDto.actNum)" v-for="item in luckList" :key='item.activityDto.actId'>
+							<li class='onBg' @click="goDetail(item.activityDto.actId,item.activityDto.actNum)" v-for="(item, i) in luckList" :key='i'>
 								<div class='left'>
-									<p>{{$t("no")}}&ensp;{{item.activityDto.actId}}&ensp;{{$t("phase")}} {{item.activityDto.actName}}</p>
+									<p>{{ actNum(item.activityDto.actId) }} {{item.activityDto.actName}}</p>
 									<p><span class=time>{{item.activityDto.endTime | time}}</span><span class='btn' @click.stop='getLuckCode(item.exchangeCode)'>{{$t("luckBtnText")}}</span></p>
 								</div>
 								<div class='right'><p>{{$t("luckCode")}}</p><span>{{item.exchangeCode}}</span></div>
@@ -315,9 +315,9 @@ body.modal-open {
 					</div>
 					<div class='list_all list' v-if='listShow'>
 						<ul v-if='luckList.length!=0'>
-							<li @click="goDetail(item.activityDto.actId,item.activityDto.actNum)" v-for='item in allList' :key='item.activityDto.actId' :class="[item.exchangeCode==null?item.activityDto.actStatus==1?'':item.activityDto.actStatus==2?'lottery':'hasLottery' : 'onBg']">
+							<li @click="goDetail(item.activityDto.actId,item.activityDto.actNum)" v-for='(item, i) in allList' :key='i' :class="[item.exchangeCode==null?item.activityDto.actStatus==1?'':item.activityDto.actStatus==2?'lottery':'hasLottery' : 'onBg']">
 								<div class='left'>
-									<p>{{$t("no")}}&ensp;{{item.activityDto.actNum}}&ensp;{{$t("phase")}} {{item.activityDto.actName}}</p>
+									<p>{{ actNum(item.activityDto.actNum) }} {{item.activityDto.actName}}</p>
 									<p><span class=time>{{item.activityDto.endTime | time}}</span><span v-if='item.exchangeCode == null'><span v-if='item.activityDto.actStatus==2' class='btn'>{{$t("ongoing")}}</span><span class='btn' v-if='item.activityDto.actStatus==3'>{{$t("inTheLottery")}}</span><span class='btn' v-else>{{$t("hasTheLottery")}}</span></span><span class='btn' @click.stop='getLuckCode(item.exchangeCode)' v-else>{{$t("luckBtnText")}}</span></p>
 								</div>
 								<div class='right' v-if='item.exchangeCode == null'>{{$t("inInvolved")}}{{item.joinCount}}{{$t("inow")}}</div>
@@ -367,8 +367,13 @@ export default {
       luckList:[],
       allList:[]
     }
-  },
+	},
+	
   methods:{
+		actNum(num){
+      let noPhase = this.$t('noPhase').split('{$}')
+      return noPhase[0] +''+ num +''+ noPhase[1]
+    },
     rechargeShowFn() {
       this.rechargeShow = true;
       document.getElementsByTagName('body')[0].classList.add("modal-open");

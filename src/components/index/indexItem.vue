@@ -120,9 +120,7 @@
 
 <template>
   <div class="indexItem" @click="goDetail">
-    <div class='period'>
-      {{$t("no")}} <span> {{infor.actNum}} </span> {{$t("phase")}}
-    </div>
+    <div class='period' v-html="actNum"></div>
     <div class='goodsImg'>
       <img :src='infor.thumb.url' />
     </div>
@@ -165,6 +163,10 @@ export default {
     }
   },
   computed:{
+    actNum(){
+      let noPhase = this.$t('noPhase').split('{$}')
+      return noPhase[0] +'<span style="color: #fff600;">'+ this.infor.actNum +'</span>'+ noPhase[1]
+    },
     schedule(){
       return (this.infor.joinCount / (this.infor.joinCount + this.infor.endCount)).toFixed(2) * 100;
     }

@@ -2,8 +2,6 @@
   "record": "参与记录",
   "participant": "参与人数",
   "lotterySchedule": "开奖进度",
-  "no": "第",
-  "phase": "期",
   "noPhase": "第{$}期",
   "area": "区",
   "openAward": "开奖区",
