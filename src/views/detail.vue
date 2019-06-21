@@ -210,7 +210,6 @@ export default {
       actNum--
       console.log(actNum)
       if(actNum < 1){
-        alert('没有了')
         return
       }
       // actNum += actNum
@@ -227,7 +226,7 @@ export default {
       copycode.value = code
       copycode.select(); // 选择对象
       document.execCommand("Copy"); // 执行浏览器复制命令
-      alert("OK。");
+      this.$Toast('OK !');
     },
     submit(){
       const actId = this.$route.query.actId
@@ -238,7 +237,7 @@ export default {
         joinCount: this.joinCount
       }).then(({code}) => {
         if(code == 1){
-          alert('submit ok')
+          this.$Toast('OK !');
         }
       })
     },
