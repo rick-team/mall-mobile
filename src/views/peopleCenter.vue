@@ -407,7 +407,7 @@ export default {
       copycode.value = code;
       copycode.select(); // 选择对象
       document.execCommand("Copy"); // 执行浏览器复制命令
-      this.$Toast('OK !');
+      this.$Toast(this.$t('copy'));
     }
   },
   components: {
