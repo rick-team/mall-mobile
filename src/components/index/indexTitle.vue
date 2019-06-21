@@ -1,7 +1,7 @@
 <template>
   <div id="indexTitle">
     <div class='title'>
-        <span>{{name}}</span>{{$t('area')}}
+        <span>{{name}}</span>
     </div>
   </div>
 </template>

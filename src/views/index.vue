@@ -39,7 +39,7 @@
 .bottom_nav .use .a_ {
   width: 2.4rem;
   height: .48rem;
-  background: #e81354;
+  background: rgba(232,19,84,1);
   border-radius: .24rem;
   line-height: .48rem;
   font-size: .26rem;
@@ -94,7 +94,7 @@ body.modal-open {
     <qa v-if='qaShowBl' />
     <div class='bottom_nav'>
       <div class='img left'>
-        <img :src='userInfo.imgUrl' />
+        <img :src='"http://headicon.raymangaapp.com" + userInfo.imgUrl' />
       </div>
       <div class='use left'>
         <p>{{userInfo.nickName}}</p>
@@ -135,6 +135,7 @@ export default {
     this.$store.dispatch('getCarousel', {
       lang: this.$store.state.lang
     }).then((res) => {
+      console.log(res);
       this.bannerphoto = res.carouselList
     })
 
@@ -148,7 +149,7 @@ export default {
       token: this.$store.state.token
     }).then((data) => {
       console.log(data);
-      this.diamond = data.userBalance?data.userBalance:this.diamond;
+      this.diamond = data.userBalance;
       this.userInfo = data.userInfo
     })
 

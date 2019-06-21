@@ -2,7 +2,7 @@
   <div id="carousel">
     <swiper :options="swiperOption" ref="swiperOption" v-if='banner.length>0'>
       <swiper-slide v-for="(items,index) in banner" :key="index">
-        <img style='width:100%' :src="items.url || items.img.url " alt="">
+        <img style='width:100%' @click="jump(item.actId)" :src="items.url || items.img.url " alt="">
       </swiper-slide>
        <div class="swiper-pagination" id="pagination" slot="pagination"></div>
     </swiper>
@@ -15,7 +15,8 @@ import { swiper , swiperSlide } from 'vue-awesome-swiper'
 export default {
   name: 'indexHeader',
   props: {
-    banner: Array
+    banner: Array,
+    bl: false
   },
   data() {
     return {
@@ -42,6 +43,17 @@ export default {
           slideShadows : true
         }
       },
+    }
+  },
+  methdos: {
+    jump(id) {
+      if(this.bl) {
+         this.$router.push({
+          path:'/detail', 
+          query:{
+            actId: id
+        }})
+      }
     }
   },
   components: {

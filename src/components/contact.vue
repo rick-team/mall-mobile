@@ -20,7 +20,14 @@
 <template>
   <div id="contact">
     <p :style='{color: color}'>{{$t("service")}}</p>
-    <div>
+    <div v-if='$store.state.lang == 1'>
+      <img src='../assets/ic_bottom_fb.png' />
+    </div>
+    <div v-if='$store.state.lang == 2'>
+      <img src='../assets/ic_bottom_fb.png' />
+      <img src='../assets/ic_bottom_ins.png' />
+    </div>
+    <div v-if='$store.state.lang == 3'>
       <img src='../assets/ic_bottom_fb.png' />
       <img src='../assets/ic_bottom_ins.png' />
       <img src='../assets/ic_bottom_whatsapp.png' />
