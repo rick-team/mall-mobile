@@ -39,7 +39,7 @@
 .bottom_nav .use .a_ {
   width: 2.4rem;
   height: .48rem;
-  background: rgba(232,19,84,1);
+  background:#e81354;
   border-radius: .24rem;
   line-height: .48rem;
   font-size: .26rem;

@@ -54,7 +54,7 @@
 .a_ {
   width: 2.4rem;
   height: .48rem;
-  background: #e81354;
+  background: #ec1049;
   border-radius: .24rem;
   line-height: .48rem;
   font-size: .26rem;
