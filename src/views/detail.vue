@@ -293,9 +293,10 @@ export default {
           this.time = `${h}:${m}:${s}`
           setTimeout(countTime,1000)
         } else {
-          if(this.activity.actStatus === 2){
-            kaijan()
-          }
+          this.activity.actStatus = 3
+          // if(this.activity.actStatus === 2){
+          //   kaijan()
+          // }
           // location.reload()
         }
       }
