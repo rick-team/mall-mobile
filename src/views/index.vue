@@ -85,7 +85,7 @@ body.modal-open {
 <template>
   <div id="index" @click='closeQA'>
     <div class='qa_click' v-if='!qaShowBl' @click.stop="showQA"><img src='../assets/qa_click.png'></div>
-    <indexHeader :banner='bannerphoto' />
+    <indexHeader :banner='bannerphoto' :bl='true' />
     <winningMsg class='luckMsg' />
     <volume />
     <diamond />

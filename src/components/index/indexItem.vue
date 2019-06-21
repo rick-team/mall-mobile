@@ -170,42 +170,28 @@ export default {
     }
   },
   mounted(){
-    function checkTime(i){
-        if (i <= 10) {
-            i = "0" + i;
-        }
-        return i;
-    }
-    let startTime = Math.round(new Date() / 1000);
-    let endTime= this.infor.endTime;
+    const countTime = () => {
+      let startTime = new Date().getTime();
+      let endTime= this.infor.endTime;
+  
+      var leftTime = endTime-startTime
 
-    this.timeid = setInterval(() => {
-        let ts = endTime - startTime;
-        let hh = parseInt(ts / 60 / 60 % 24, 10);
-        let mm = parseInt(ts / 60 % 60, 10);
-        let ss = parseInt(ts % 60, 10);
-        hh = checkTime(hh);
-        mm = checkTime(mm);
-        ss = checkTime(ss);
-        
-        if(ts>0){
-          this.time = hh + ":" + mm + ":" + ss
-          startTime ++;
-        }else if(ts < 0){
-          this.endTime()
-          this.time = '00:00:00'
-        }
-    },1000);
+      if (leftTime>=0) {  
+         let h = Math.floor(leftTime/1000/60/60%24);  
+         let m = Math.floor(leftTime/1000/60%60);  
+         let s = Math.floor(leftTime/1000%60);
+          
+         h = h < 10 ? `0${h}` : h
+         m = m < 10 ? `0${m}` : m
+         s = s < 10 ? `0${s}` : s
+         
+         this.time = `${h}:${m}:${s}`
+         setTimeout(countTime,1000)
+      }
+    }
+    countTime()
   },
   methods:{
-    endTime(){
-      try {
-        clearInterval(this.timeid)
-        this.timeid = null
-      }catch(e) {
-        // console.log(e);
-      }
-    },
     goDetail(){
       this.$router.push({
         path:'/detail', 
@@ -214,9 +200,6 @@ export default {
           actNum: this.infor.actNum
       }})
     }
-  },
-  destroyed(){
-    this.endTime()
   }
 }
 </script>

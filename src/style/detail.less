@@ -23,6 +23,7 @@
 
     .detail-price{
       line-height: .5rem;
+      padding-top: .2rem;
       color: @danger;
       font-size: .36rem;
       span{
@@ -32,11 +33,13 @@
 
     .detail-description{
       line-height: .36rem;
+      font-size: .26rem;
       margin-bottom: .1rem
     }
 
     .detail-parms {
       p{
+        font-size: .26rem;
         line-height: .32rem;
       }
     }
@@ -93,7 +96,6 @@
           color: #FFF;
           background: @danger;
           font-size: 0.18rem;
-          width: 1.15rem;
           height: .3rem;
         }
       }
@@ -124,7 +126,7 @@
         margin-bottom: .2rem;
 
         span{
-          font-size: .18rem;
+          font-size: .26rem;
           line-height: .4rem;
           color: #686868;
         }
@@ -171,7 +173,8 @@
 
         span{
           display: block;
-          font-size: .72rem;
+          text-align: center;
+          font-size: .65rem;
           color: @color;
           margin: .1rem;
         }
@@ -186,10 +189,11 @@
     .detail-open-wrap__tips{
       line-height: .4rem;
       margin-bottom: .2rem;
+      font-size: .26rem;
     }
 
     .detail-end-wrap__plan{
-      width: 4rem;
+      width: 4.5rem;
       margin: 0 auto;
       font-size: .26rem;
 
@@ -203,6 +207,11 @@
           height: .65rem;
           background: #999999;
           border-radius: 100%;
+          overflow: hidden;
+          img{
+            width: 100%;
+
+          }
         }
         .name{
           margin-left: .15rem;
@@ -213,14 +222,14 @@
         text-align: left;
 
         label{
-          width: 1rem;
+          
           display: inline-block;
           height: .4rem;
           line-height: .4rem;
         }
 
         .code{
-          font-size: .48rem;
+          font-size: .36rem;
         }
       }
     }
@@ -265,7 +274,7 @@
         color: #FFF;
         margin-left: .2rem;
         border-radius: .88rem;
-        font-size: .446rem;
+        font-size: .36rem;
       }
     }
     
@@ -339,6 +348,10 @@
         height: .65rem;
         background: fade(#FFF, 65%);
         border-radius: 100%;
+        overflow: hidden;
+        img{
+          width: 100%;
+        }
       }
       dd{
         margin-left: .15rem;

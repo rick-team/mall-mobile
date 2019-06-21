@@ -55,12 +55,26 @@ const i18n = new VueI18n({
   }
 })
 
+const app = new Vue({
+  router,
+  store,
+  i18n,
+  created() {
+    locationBar.token && this.$store.commit('saveToken', locationBar.token)
+    this.$store.commit('saveLang', lang)
+  },
+  render: h => h(App)
+}).$mount('#app')
+
+
 Vue.filter('time', function (time) {
   var date = new Date(time + 8 * 3600 * 1000); // 增加8小时
   return date.toJSON().substr(0, 19).replace('T', ' ');
 })
 
 Vue.filter('fmoney', function (val) {
+  const thousand = app.$t('thousand')
+  const minute = app.$t('minute')
   if (val) {
     let symbol = ''
     if (val < 0) {
@@ -71,27 +85,14 @@ Vue.filter('fmoney', function (val) {
     let num = numArr[0]
     let result = ''
     while (num.length > 3) {
-      result = ',' + num.slice(-3) + result
+      result = thousand + num.slice(-3) + result
       num = num.slice(0, num.length - 3)
     }
     if (num) {
       result = num + result
     }
-    return symbol + result + '.' + numArr[1]
+    return symbol + result + minute + numArr[1]
   } else {
     return '-'
   }
 })
-
-
-
-new Vue({
-  router,
-  store,
-  i18n,
-  created() {
-    locationBar.token && this.$store.commit('saveToken', locationBar.token)
-    this.$store.commit('saveLang', lang)
-  },
-  render: h => h(App)
-}).$mount('#app')
