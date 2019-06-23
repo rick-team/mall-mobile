@@ -169,7 +169,7 @@ export default {
       let unit
       if(this.activity.prize.priceType == 1){
         unit = this.$t('brick')
-      } else if(his.activity.prize.priceType == 2){
+      } else if(this.activity.prize.priceType == 2){
         unit = this.$t('ticket')
       }
       return noPhase[0] + this.activityDetail.joinPrice + unit + noPhase[1]
@@ -212,8 +212,10 @@ export default {
     next(){
       const actId = this.$route.query.actId
       let actNum = parseInt(this.$route.query.actNum)
-      console.log(actNum)
       actNum++
+      if(isNaN(actNum)){
+        actNum = this.$route.query.actNum
+      }
       // actNum += actNum
       this.$router.push({
         path:'/detail', 
@@ -226,13 +228,11 @@ export default {
     prev(){
       const actId = this.$route.query.actId
       let actNum = parseInt(this.$route.query.actNum)
-      console.log(actNum)
       actNum--
-      console.log(actNum)
       if(actNum < 1){
+        actNum = 1
         return
       }
-      // actNum += actNum
       this.$router.push({
         path:'/detail', 
         query:{
@@ -258,6 +258,7 @@ export default {
       }).then(({code}) => {
         if(code == 1){
           this.$Toast(this.$t('submitSuccess'));
+          location.reload()
         }
       })
     },
@@ -327,19 +328,14 @@ export default {
           this.time = `${h}:${m}:${s}`
           setTimeout(countTime,1000)
         } else {
-          this.activity.actStatus = 3
           setTimeout(kaijan, 2000)
-
-          // if(this.activity.actStatus === 2){
-          //   kaijan()
-          // }
-          // location.reload()
         }
       }
       if(this.activityDetail.activity.actStatus == 2){
         countTime()
       } else if(this.activityDetail.activity.actStatus == 3) {
-        setTimeout(kaijan, 2000)
+        countTime()
+        // setTimeout(kaijan, 2000)
       }
 
     }

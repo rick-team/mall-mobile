@@ -168,7 +168,7 @@ export default {
       return noPhase[0] +'<span style="color: #fff600;">'+ this.infor.actNum +'</span>'+ noPhase[1]
     },
     schedule(){
-      return (this.infor.joinCount / (this.infor.joinCount + this.infor.endCount)).toFixed(2) * 100;
+      return ((this.infor.joinCount / (this.infor.joinCount + this.infor.endCount)).toFixed(2) * 100).toFixed(0)
     }
   },
   mounted(){
