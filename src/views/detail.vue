@@ -108,15 +108,14 @@
     <div class="detail-expect">
       <div class="detail-expect-head" v-html="myJoinRecord"></div>
       <div class="detail-expect-body" v-if="activityDetail.myJoinRecord">
+        
         <div class="detail-expect-time">
           <span>{{$t("involvedTime")}}</span>
-          <p>2019-5-11 09:56:45</p>
-          <p>2019-5-11 09:56:45</p>
+          <p v-for="(item, i) in activityDetail.myJoinRecord" :key="i">{{ item.joinTime | time }}</p>
         </div>
         <div class="detail-expect-code">
           <span>{{$t("luckyCode")}}</span>
-          <p>102689566</p>
-          <p>102689566</p>
+          <p v-for="(item, i) in activityDetail.myJoinRecord" :key="i">{{ item.joinCode }}</p>
         </div>
       </div> 
     </div>
@@ -161,8 +160,9 @@ export default {
   computed:{
     myJoinRecord(){
       let noPhase = this.$t('youParticipate').split('{$}')
-      const myJoinRecord = this.activityDetail.myJoinRecord || 0
-      return noPhase[0] +'<span>'+ myJoinRecord +'</span>'+ noPhase[1]
+      let myJoinRecord = this.activityDetail.myJoinRecord
+      const len = myJoinRecord && myJoinRecord.length || 0
+      return noPhase[0] +'<span>'+ len +'</span>'+ noPhase[1]
     },
     activityTipsAll(){
       let noPhase = this.$t('activityTipsAll').split('{$}')
@@ -191,7 +191,8 @@ export default {
   created(){
     
     this.$store.dispatch('getActivityDetail',{
-      ...this.$route.query
+      ...this.$route.query,
+      token: this.$store.state.token
     }).then(({activityDetail}) => {
       console.log(activityDetail)
       if(activityDetail){
@@ -294,7 +295,8 @@ export default {
       const kaijan = () => {
         
         this.$store.dispatch('getActivityDetail',{
-          ...this.$route.query
+          ...this.$route.query,
+          token: this.$store.state.token
         }).then(({activityDetail}) => {
           if(activityDetail){
             this.activityDetail = activityDetail
