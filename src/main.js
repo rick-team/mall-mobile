@@ -4,6 +4,7 @@ import router from './router/router'
 import store from './store/store'
 import VueI18n from 'vue-i18n'
 import { Toast } from 'vant';
+import { List } from 'vant';
 
 import 'vant/lib/index.css';
 
@@ -17,6 +18,7 @@ import 'swiper/dist/css/swiper.css'
 
 Vue.use(VueI18n)
 Vue.use(Toast);
+Vue.use(List);
 
 Vue.prototype.$Toast = Toast;
 

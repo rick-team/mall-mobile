@@ -66,7 +66,6 @@
   z-index: 11;
   width: 95%;
   top: 2rem;
-  padding-bottom: .2rem;
 }
 .listContainer .box {
   padding-top: .34rem;
@@ -106,6 +105,9 @@
 	right: 0;
 	bottom: -.1rem;
 	margin: 0 auto;
+}
+.listContainer .list{
+  padding-bottom: .9rem;
 }
 .listContainer .list li {
 	width: 6.16rem;
@@ -273,6 +275,14 @@ body.modal-open {
   z-index: -999;
   bottom: 0;
 }
+.people_bottom {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: #fff;
+  padding-top: .2rem;
+}
 </style>
 <template>
   <div id="peopleCenter">
@@ -303,30 +313,34 @@ body.modal-open {
 						<p class='left' @click='listShow=true' :class='{on:listShow}'><span>{{$t("allAward")}}</span></p>
 					</div>
 					<div class='list_lucky list' v-if='!listShow'>
-						<ul>
-							<li class='onBg' @click="goDetail(item.activityDto.actId,item.activityDto.actNum)" v-for="(item, i) in luckList" :key='i'>
-								<div class='left'>
-									<p>{{ actNum(item.activityDto.actId) }} {{item.activityDto.actName}}</p>
-									<p><span class=time>{{item.activityDto.endTime | time}}</span><span class='btn' @click.stop='getLuckCode(item.exchangeCode)'>{{$t("luckBtnText")}}</span></p>
-								</div>
-								<div class='right'><p>{{$t("luckCode")}}</p><span>{{item.exchangeCode}}</span></div>
-							</li>
-						</ul>
+						<van-list @load="lcukOnLoad" v-model="luck.loading" :finished="luck.finished" loading-text="loading">
+              <ul>
+                <li class='onBg' @click="goDetail(item.activityDto.actId,item.activityDto.actNum)" v-for="(item, i) in luckList" :key='i'>
+                  <div class='left'>
+                    <p>{{ actNum(item.activityDto.actId) }} {{item.activityDto.actName}}</p>
+                    <p><span class=time>{{item.activityDto.endTime | time}}</span><span class='btn' @click.stop='getLuckCode(item.exchangeCode)'>{{$t("luckBtnText")}}</span></p>
+                  </div>
+                  <div class='right'><p>{{$t("luckCode")}}</p><span>{{item.exchangeCode}}</span></div>
+                </li>
+              </ul>
+						</van-list>
 					</div>
 					<div class='list_all list' v-if='listShow'>
-						<ul>
-							<li @click="goDetail(item.activityDto.actId,item.activityDto.actNum)" v-for='(item, i) in allList' :key='i' :class="[item.exchangeCode==null?item.activityDto.actStatus==1?'':item.activityDto.actStatus==2?'lottery':'hasLottery' : 'onBg']">
-								<div class='left'>
-									<p>{{ actNum(item.activityDto.actNum) }} {{item.activityDto.actName}}</p>
-									<p><span class=time>{{item.activityDto.endTime | time}}</span><span v-if='item.exchangeCode == null'><span v-if='item.activityDto.actStatus==2' class='btn'>{{$t("ongoing")}}</span><span class='btn' v-if='item.activityDto.actStatus==3'>{{$t("inTheLottery")}}</span><span class='btn' v-else>{{$t("hasTheLottery")}}</span></span><span class='btn' @click.stop='getLuckCode(item.exchangeCode)' v-else>{{$t("luckBtnText")}}</span></p>
-								</div>
-								<div class='right' v-if='item.exchangeCode == null'>{{$t("inInvolved")}}{{item.joinCount}}{{$t("inow")}}</div>
-                <div class='right' v-else><p>{{$t("luckCode")}}</p><span>{{item.exchangeCode}}</span></div>
-							</li>
-						</ul>
+						<van-list @load="allOnLoad" v-model="all.loading" :finished="all.finished" loading-text="loading">
+              <ul>
+                <li @click="goDetail(item.activityDto.actId,item.activityDto.actNum)" v-for='(item, i) in allList' :key='i' :class="[item.exchangeCode==null?item.activityDto.actStatus==1?'':item.activityDto.actStatus==2?'lottery':'hasLottery' : 'onBg']">
+                  <div class='left'>
+                    <p>{{ actNum(item.activityDto.actNum) }} {{item.activityDto.actName}}</p>
+                    <p><span class=time>{{item.activityDto.endTime | time}}</span><span v-if='item.exchangeCode == null'><span v-if='item.activityDto.actStatus==2' class='btn'>{{$t("ongoing")}}</span><span class='btn' v-if='item.activityDto.actStatus==3'>{{$t("inTheLottery")}}</span><span class='btn' v-else>{{$t("hasTheLottery")}}</span></span><span class='btn' @click.stop='getLuckCode(item.exchangeCode)' v-else>{{$t("luckBtnText")}}</span></p>
+                  </div>
+                  <div class='right' v-if='item.exchangeCode == null'>{{$t("inInvolved")}}{{item.joinCount}}{{$t("inow")}}</div>
+                  <div class='right' v-else><p>{{$t("luckCode")}}</p><span>{{item.exchangeCode}}</span></div>
+                </li>
+              </ul>
+						</van-list>
 					</div>
 				</div>
-				<contact color='#000' />
+				<contact class='people_bottom' color='#000' />
 			</div>
 
 			<div v-if='rechargeShow' @click="rechargeCloseFn" class='rechargeContainer'>
@@ -353,6 +367,7 @@ body.modal-open {
 
 <script>
 import contact from '@/components/contact'
+import { setTimeout } from 'timers';
 
 export default {
   name: 'peopleCenter',
@@ -365,11 +380,66 @@ export default {
       diamond: {},
       userInfo: {},
       luckList:[],
-      allList:[]
+      allList:[],
+      luck:{
+        loading: false,
+        finished: false,
+        tab: 1
+      },
+      all: {
+        loading: false,
+        finished: false,
+        tab: 1
+      }
     }
 	},
 	
   methods:{
+    lcukOnLoad() {
+      this.luck.loading = true;
+      console.log(11);
+      setTimeout(() => {
+        // 加载状态结束
+        this.$store.dispatch('getMyJoinRecord',{
+          token: this.$store.state.token,
+          page: this.luck.tab
+        }).then((data) => {
+          if(data.code == 1) {
+            this.luckList = this.luckList.concat(data.joinRecordList);
+            if(data.joinRecordList.length == 0){
+              this.luck.finished = false;
+            }else {
+              this.luck.tab++;
+            }
+            this.luck.loading = false;
+          }
+          console.log(data);
+        })
+        // 数据全部加载完成
+      }, 500);
+    },
+    allOnLoad() {
+      this.all.loading = true;
+      setTimeout(() => {
+        // 加载状态结束
+        this.$store.dispatch('getMyAwardRecord',{
+          token: this.$store.state.token,
+          page: this.all.tab
+        }).then((data) => {
+          if(data.code == 1) {
+            this.allList = this.allList.concat(data.joinRecordList);
+            if(data.joinRecordList.length == 0){
+              this.all.finished = false;
+            }else {
+              this.all.tab++;
+            }
+            this.all.loading = false;
+          }
+          console.log(data);
+        })
+        // 数据全部加载完成
+      }, 500);
+    },
 		actNum(num){
       let noPhase = this.$t('noPhase').split('{$}')
       return noPhase[0] +''+ num +''+ noPhase[1]
@@ -416,7 +486,7 @@ export default {
   computed: {
     bgHeight() {
       let length = !this.listShow? this.luckList.length : this.allList.length;
-      let str = (length * 92 + 300) / 100 +'rem';
+      let str = (length * 105 + 400) / 100 +'rem';
       return str
     }
   },
@@ -433,22 +503,24 @@ export default {
 
     this.$store.dispatch('getMyJoinRecord',{
       token: this.$store.state.token,
-      page: 1
-	  }).then((data) => {
-      if(data.code == 1) {
-        this.allList = data.joinRecordList;
-      }
-      console.log(data);
-    })
-
-    this.$store.dispatch('getMyAwardRecord',{
-	    token: this.$store.state.token,
-      page: 1
+      page: this.luck.tab
 	  }).then((data) => {
       if(data.code == 1) {
         this.luckList = data.joinRecordList;
       }
-      console.log(data)
+      this.luck.tab++;
+      console.log(this.luckList);
+    })
+
+    this.$store.dispatch('getMyAwardRecord',{
+	    token: this.$store.state.token,
+      page: this.all.tab
+	  }).then((data) => {
+      if(data.code == 1) {
+        this.allList = data.joinRecordList;
+      }
+      this.all.tab++;
+      console.log(this.allList)
     })
   }
 }
