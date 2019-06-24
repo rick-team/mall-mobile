@@ -1,6 +1,8 @@
 import axios from 'axios'
 import store from '@/store/store'
 import baseURL from './baseURL'
+import { Toast } from 'vant';
+
 
 const server = axios.create({
   baseURL: baseURL,
@@ -20,19 +22,11 @@ server.interceptors.request.use(config => {
 })
 
 // // 响应拦截器 返回data内容
-server.interceptors.response.use(({data}) => {
-  return data
+server.interceptors.response.use((res) => {
+  console.log(res)
+  return res.data
 }, error => {
-  // if (error.response) {
-  //   switch (error.response.status) {
-  //     case 401:
-  //       store.commit('LOGOUT')
-  //       router.replace({
-  //         path: '/login',
-  //         query: {redirect: router.currentRoute.fullPath}
-  //       })
-  //   }
-  // }
+  Toast("服务端异常")
   return Promise.reject(error)
 })
 

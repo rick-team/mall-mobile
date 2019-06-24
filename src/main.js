@@ -5,6 +5,7 @@ import store from './store/store'
 import VueI18n from 'vue-i18n'
 import { Toast } from 'vant';
 import { List } from 'vant';
+import { Icon } from 'vant';
 
 import 'vant/lib/index.css';
 
@@ -19,6 +20,7 @@ import 'swiper/dist/css/swiper.css'
 Vue.use(VueI18n)
 Vue.use(Toast);
 Vue.use(List);
+Vue.use(Icon);
 
 Vue.prototype.$Toast = Toast;
 

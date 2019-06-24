@@ -28,8 +28,8 @@
       </div>
 
       <div class="detail-open-button">
-        <div class="next" @click="next"></div>
-        <div class="prev" @click="prev"></div>
+        <div class="next" @click="next" v-if="activity.actStatus == 4"></div>
+        <div class="prev" @click="prev" v-if="$route.query.actNum != 1"></div>
       </div>
 
       <div v-if="activity.actStatus == 4">
@@ -95,7 +95,7 @@
         
         <div class="detail-open-wrap__handle" v-if="activity.actStatus == 2">
           <div class="detail-open-wrap__button_minus" @click="minus"></div>
-          <input type="number" :value="joinCount">
+          <input type="number" v-model="joinCount" @input="input" >
           <div class="detail-open-wrap__button_plus" @click="plus"></div>
           <button class="detail-open-wrap-submit" @click="submit">{{$t("submit")}}</button>
         </div>
@@ -107,17 +107,17 @@
 
     <div class="detail-expect">
       <div class="detail-expect-head" v-html="myJoinRecord"></div>
-      <div class="detail-expect-body" v-if="activityDetail.myJoinRecord">
+      <div class="detail-expect-body" :class='{"zhedang":!show}' v-if="activityDetail.myJoinRecord">
+        
         <div class="detail-expect-time">
           <span>{{$t("involvedTime")}}</span>
-          <p>2019-5-11 09:56:45</p>
-          <p>2019-5-11 09:56:45</p>
+          <p v-for="(item, i) in activityDetail.myJoinRecord" :key="i">{{ item.joinTime | time }}</p>
         </div>
         <div class="detail-expect-code">
           <span>{{$t("luckyCode")}}</span>
-          <p>102689566</p>
-          <p>102689566</p>
+          <p v-for="(item, i) in activityDetail.myJoinRecord" :key="i">{{ item.joinCode }}</p>
         </div>
+        <div class='detail-expect-body-show' @click='show = !show'><van-icon name="arrow-down" v-if='!show' /> <van-icon name="arrow-up" v-if='show' /></div>
       </div> 
     </div>
 
@@ -141,6 +141,7 @@
 
 <script>
 import indexHeader from '@/components/carousel'
+import { setTimeout } from 'timers';
 
 export default {
   components: {
@@ -154,18 +155,26 @@ export default {
       joinCount: 1,
       awardRecord: null,
       activityDetail: {},
-      time: '00:00:00'
+      time: '00:00:00',
+      show:false
     }
   },
   computed:{
     myJoinRecord(){
       let noPhase = this.$t('youParticipate').split('{$}')
-      const myJoinRecord = this.activityDetail.myJoinRecord || 0
-      return noPhase[0] +'<span>'+ myJoinRecord +'</span>'+ noPhase[1]
+      let myJoinRecord = this.activityDetail.myJoinRecord
+      const len = myJoinRecord && myJoinRecord.length || 0
+      return noPhase[0] +'<span>'+ len +'</span>'+ noPhase[1]
     },
     activityTipsAll(){
       let noPhase = this.$t('activityTipsAll').split('{$}')
-      return noPhase[0] + this.activityDetail.joinPrice + noPhase[1]
+      let unit
+      if(this.activity.prize.priceType == 1){
+        unit = this.$t('brick')
+      } else if(this.activity.prize.priceType == 2){
+        unit = this.$t('ticket')
+      }
+      return noPhase[0] + this.activityDetail.joinPrice + unit + noPhase[1]
     },
     actNum(){
       let noPhase = this.$t('noPhase').split('{$}')
@@ -184,7 +193,8 @@ export default {
   created(){
     
     this.$store.dispatch('getActivityDetail',{
-      ...this.$route.query
+      ...this.$route.query,
+      token: this.$store.state.token
     }).then(({activityDetail}) => {
       console.log(activityDetail)
       if(activityDetail){
@@ -192,8 +202,9 @@ export default {
         this.prize = activityDetail.activity.prize
         this.activity = activityDetail.activity
         this.banner = activityDetail.detailImg
-        this.timeOut(activityDetail.activity.endTime)
         this.awardRecord = activityDetail.awardRecord
+
+        this.timeOut(activityDetail.activity.endTime)
       } else {
         this.prev()
         console.log(activityDetail)
@@ -204,8 +215,10 @@ export default {
     next(){
       const actId = this.$route.query.actId
       let actNum = parseInt(this.$route.query.actNum)
-      console.log(actNum)
       actNum++
+      if(isNaN(actNum)){
+        actNum = this.$route.query.actNum
+      }
       // actNum += actNum
       this.$router.push({
         path:'/detail', 
@@ -218,13 +231,11 @@ export default {
     prev(){
       const actId = this.$route.query.actId
       let actNum = parseInt(this.$route.query.actNum)
-      console.log(actNum)
       actNum--
-      console.log(actNum)
       if(actNum < 1){
+        actNum = 1
         return
       }
-      // actNum += actNum
       this.$router.push({
         path:'/detail', 
         query:{
@@ -238,7 +249,7 @@ export default {
       copycode.value = code
       copycode.select(); // 选择对象
       document.execCommand("Copy"); // 执行浏览器复制命令
-      this.$Toast('OK !');
+      this.$Toast(this.$t('copy'));
     },
     submit(){
       const actId = this.$route.query.actId
@@ -249,7 +260,8 @@ export default {
         joinCount: this.joinCount
       }).then(({code}) => {
         if(code == 1){
-          this.$Toast('OK !');
+          this.$Toast(this.$t('submitSuccess'));
+          location.reload()
         }
       })
     },
@@ -262,26 +274,42 @@ export default {
         this.joinCount --
       }
     },
+    input(){
+      console.log(this.joinCount)
+      let max = this.end - this.activityDetail.maxJoinCount < 0 ? this.end : this.activityDetail.maxJoinCount
+
+      if(this.joinCount < 1 || this.joinCount == ''){
+        this.joinCount = 1
+      }
+
+      if(this.joinCount > max){
+        this.joinCount = max
+      }
+    },
     plus(){
+      if(this.joinCount >= this.end || this.joinCount >= this.activityDetail.maxJoinCount ){
+        return
+      }
       this.joinCount ++
     },
     timeOut(endTime){
 
       const kaijan = () => {
+        
         this.$store.dispatch('getActivityDetail',{
-          ...this.$route.query
+          ...this.$route.query,
+          token: this.$store.state.token
         }).then(({activityDetail}) => {
-          console.log(activityDetail)
           if(activityDetail){
             this.activityDetail = activityDetail
             this.prize = activityDetail.activity.prize
             this.activity = activityDetail.activity
             this.banner = activityDetail.detailImg
-            this.timeOut(activityDetail.activity.endTime)
             this.awardRecord = activityDetail.awardRecord
+            this.timeOut(activityDetail.activity.endTime)
+            
           } else {
             this.prev()
-            console.log(activityDetail)
           }
         })
       }
@@ -304,14 +332,16 @@ export default {
           this.time = `${h}:${m}:${s}`
           setTimeout(countTime,1000)
         } else {
-          this.activity.actStatus = 3
-          // if(this.activity.actStatus === 2){
-          //   kaijan()
-          // }
-          // location.reload()
+          setTimeout(kaijan, 2000)
         }
       }
-      countTime()
+      if(this.activityDetail.activity.actStatus == 2){
+        countTime()
+      } else if(this.activityDetail.activity.actStatus == 3) {
+        countTime()
+        // setTimeout(kaijan, 2000)
+      }
+
     }
   }
 }
