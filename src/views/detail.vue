@@ -33,6 +33,7 @@
       </div>
 
       <div v-if="activity.actStatus == 4">
+        <div v-if="awardRecord">
       <div class="detail-check-wrap__plan" v-if="awardRecord.exchangeCode">
         <div class="detail-check-wrap__title">
           <p>{{$t("openAwardMsg")}}</p>
@@ -63,7 +64,7 @@
           </li>
         </ul>
       </div></div>
-
+</div>
       <div class="detail-open-wrap__plan" v-if="activity.actStatus == 2 || activity.actStatus == 3">
         <div class="detail-open-wrap__progress">
           <i :style="'width: '+progress+'%'"></i>
